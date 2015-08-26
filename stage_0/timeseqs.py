@@ -29,6 +29,7 @@ def genFunc():
 
 flist = (for_loop, listComp, mapCall, genExpr, genFunc)
 
+print(sys.version)
 for y in range(10):
 	for x in flist:
 		z=timer(x)

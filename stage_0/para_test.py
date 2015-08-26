@@ -1,5 +1,24 @@
 # -*- coding: utf-8 -*
 
+az=10
+def azt():
+	global az
+	az =11
+	print(az)
+
+azt()
+print(az)
+
+def azt2():
+	import __main__
+	print(__main__.az)
+	az = 10
+	print(az)
+
+azt2()
+print(az)
+
+
 """
 # fault usage
 def a1(a,b=1,c,d=2):
@@ -76,3 +95,19 @@ echo1(1,b=4) #** 只对关键字有效
 pargs=(1,2)
 kargs={'a':3,'b':4}
 apply(echo1,pargs,kargs)
+
+
+
+def ddd(a=[]):
+	a.append(1)
+	print(a)
+	return a
+
+sa = [1,2]
+print(ddd())
+print(ddd())
+print(ddd())
+print(ddd())
+print(ddd())
+print(ddd())
+print(ddd())

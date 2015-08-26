@@ -1,6 +1,6 @@
 import time
 
-reps = 1000
+reps = 10000
 repl = range(reps)
 
 def timer(func,*pa,**kpa):
