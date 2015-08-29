@@ -6,12 +6,19 @@ from urllib2 import HTTPError
 
 import threading
 
+if os.name == 'posix':
+    basePath ="/tmp/vnshen_so/"
+else:
+    basePath =r"d:\tmp\\"
+
 baseUrl = "http://www.nvshen.so/wp-content/uploads/2015/"
 #baseUrl = "http://www.nvshen.so/wp-content/uploads/2014/"
-basePath ="/tmp/vnshen_so/"
+
 threads = []
 
 if(os.path.exists(basePath) == False):
+    if os.name == 'posix':
+        os.mkdir(r"d:\tmp")
     os.mkdir(basePath)
 
 def downloadImage(url,localPath):
