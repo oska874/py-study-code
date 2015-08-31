@@ -18,3 +18,7 @@ Python call C code in two methods:
 	>>add.add(2,3)
 	5
 	```
+
+C call Python :
+1. compile ccp.c
+	gcc -I/usr/include/python2.7 c_call_python.c -lpython2.7
