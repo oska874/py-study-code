@@ -1,4 +1,3 @@
-//#include <Akita/Akita.h>  
 #include <Python.h>
 
 int main() 
@@ -10,9 +9,9 @@ int main()
         PyRun_SimpleString("sys.path.append('./')");    
   
         //import Module  
-        PyObject* pModule = PyImport_ImportModule("hello");    
+        PyObject* pModule = PyImport_ImportModule("call");    
         if (!pModule) {    
-            print("Can't import Module!/n");
+            printf("Can't import Module!\n");
             return -1;    
         }    
   
