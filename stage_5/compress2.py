@@ -30,6 +30,7 @@ for x in comp:
 	fgz.write(x)
 comp.close()
 fgz.close()
+
 print("999")
 fgz = gzip.open("rrr1.gz","r") 
 for x in fgz:
