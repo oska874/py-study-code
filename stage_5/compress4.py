@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*- 
 
+#zip
 import zipfile
 
 z1 = zipfile.ZipFile("test.zip",'w',zipfile.ZIP_DEFLATED,)
@@ -25,5 +26,20 @@ z2 = zipfile.ZipFile("test2.zip",'w')
 
 z2.writestr("test2","12345678")
 print("zip comment")
-z2.comment#("hello world")
+#z2.comment("hello world")	#how?
 z2.close()
+
+z0 = zipfile.PyZipFile("testpy.zip",'w')
+
+z0.writepy('test.py')
+z0.close()
+
+z3 = zipfile.ZipFile("testpy.zip",'r')
+
+print("name :"+z3.filename)
+
+print('date :')
+print(z3.getinfo('test.pyc').date_time)
+
+print(z3.getinfo('test.pyc').compress_type)
+print(z3.comment)
