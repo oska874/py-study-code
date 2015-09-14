@@ -27,6 +27,7 @@ var/
 *.egg
 *.exe
 *.sw[pq]
+tags
 
 
 # PyInstaller
