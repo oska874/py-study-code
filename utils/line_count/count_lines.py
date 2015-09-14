@@ -20,7 +20,7 @@ def divide_lines(fd,ft):
 
     if ft == 'c' or ft == 'cpp':
         multi_comment = 0
-        print("this is c/c++ files")
+#    print("this is c/c++ files")
         for line in fd:
             if len(line) > 1:
                 if multi_comment == 0:
@@ -41,7 +41,7 @@ def divide_lines(fd,ft):
             else :
                 # empty line
                 l3 += 1
-        print("source %d, comment %d, empty %d" % (l1,l2,l3))
+#        print("source %d, comment %d, empty %d" % (l1,l2,l3))
     elif ft == 'py':
         print("this is python files")
     else:
@@ -64,7 +64,7 @@ if __name__ == "__main__":
         if len(line) > 1:
             ln+=1
             fd.close()
-            print(filename+"has %d lines" % ln);
+#           print(filename+"has %d lines" % ln);
             if len(l2) > 1:
                 if l2[0] == '/' and l2[1] == '/':
                         l1 += 0

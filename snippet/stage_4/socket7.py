@@ -18,7 +18,7 @@ else :
 	s.ioctl(socket.SIO_RCVALL, socket.RCVALL_ON)
 
 	# receive a package
-	print s.recvfrom(65565)
+	print( s.recvfrom(65565))
 
 	# disabled promiscuous mode
 	s.ioctl(socket.SIO_RCVALL, socket.RCVALL_OFF)
