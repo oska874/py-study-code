@@ -38,10 +38,14 @@ if __name__ == "__main__":
     for fn in fnames:
             for x in fn[2]:
                 if sys.platform == "linux2":
-                    res = stRe.match(cur_dir + "/" + x)		
+			if cur_dir[-1] != '/':
+				res = stRe.match(cur_dir + "/" + x)
+			else:
+				res = stRe.match(cur_dir + x)
+				
                 if res:
                     print(res.group())
-                    total_line += count_lines.count_line1(res.group())
+                    total_line += count_lines.count_line1(res.group(),stype)
 
     print("total line : " + str(total_line))
 
