@@ -4,6 +4,7 @@ __pycache__/
 *.so
 *.exe
 *.stackdump
+*~
 
 # C extensions
 
