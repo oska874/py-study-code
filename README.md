@@ -1,5 +1,5 @@
 DIR TREE
-.
+```
 ├── forks
 │   └── nvshen
 ├── snippet
@@ -14,7 +14,7 @@ DIR TREE
 │   └── stage_temp
 └── utils
     └── line_count
-
+```
 
 This repo has mainly three parts:
 	1. self study code snippet
