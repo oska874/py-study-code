@@ -18,7 +18,7 @@ str1 = z0.read()
 print(str1)
 
 #how?
-#有问题
+#有问题，压缩结果
 z2 = bz2.BZ2Compressor(1)
 a1 = z2.compress("123456hfajfhkdahfeinvjsmklasdlnveiornhigrngrjengker,zkadlfkeknka789123456789\n")
 z2.flush()
@@ -29,3 +29,4 @@ print(a2)
 
 a1 = bz2.compress('95f9ads5f9ds5f9ads',5)
 print(a1)
+

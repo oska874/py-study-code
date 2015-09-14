@@ -11,7 +11,13 @@ def count_line1(fna):
 	fd1 = open(fna,'r')
 	for l2 in fd1:
 		if len(l2) > 1:
-			l1 += 1
+		    if l2[0] == '/' and l2[1] == '/':
+		        l1 += 0
+		    elif l2[0] == '/' and l2[1] == '*':
+		        l1 += 0
+		    else:
+		        l1 += 1
+		            
         fd1.close()
 	return l1
 
