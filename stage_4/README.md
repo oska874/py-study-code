@@ -1,1 +1,0 @@
-socket test: udp,tcp
