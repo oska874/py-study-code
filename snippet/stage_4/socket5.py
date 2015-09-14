@@ -23,7 +23,7 @@ for res in socket.getaddrinfo(HOST, PORT, socket.AF_UNSPEC,
     break
     
 if s is None:
-    print 'could not open socket'
+    print ('could not open socket')
     sys.exit(1)
 conn, addr = s.accept()
 print 'Connected by', addr

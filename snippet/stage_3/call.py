@@ -1,2 +1,2 @@
 def display(name):  
-        print "hi",name
+        print ("hi"+name)
