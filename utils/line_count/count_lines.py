@@ -43,6 +43,14 @@ def divide_lines(fd,ft):
                 l3 += 1
 #        print("source %d, comment %d, empty %d" % (l1,l2,l3))
     elif ft == 'py':
+        for line in fd:
+            if len(line) > 1:
+		if line[0] == '#':
+		    l2 += 1
+		else:
+		    l1 += 1
+	    else:
+		l3 += 1
         print("this is python files")
     else:
         print("not supported files "+ft)

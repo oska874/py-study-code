@@ -24,6 +24,7 @@ if __name__ == "__main__":
         cur_dir = sys.argv[3]
         stype = sys.argv[2]
 
+    print("stype %s" % (stype))
     if os.path.isdir(sys.argv[3]) != True:
         print("path error")
         exit
@@ -39,7 +40,7 @@ if __name__ == "__main__":
     for fn in fnames:
         for x in fn[2]:
             if sys.platform == "linux2":
-                if os.path.isfile(cur_dir) :
+                if os.path.isfile(cur_dir) : #need modify
                     if cur_dir[-1] != '/':
                         res = stRe.match(cur_dir + "/" + x)
                     else:
