@@ -21,7 +21,7 @@ if __name__ == "__main__":
         print("parameters error")
         exit	
     else:		
-        cur_dir = sys.argv[3]
+        dst_dir = sys.argv[3]
         stype = sys.argv[2]
 
     print("stype %s" % (stype))
@@ -29,7 +29,7 @@ if __name__ == "__main__":
         print("path error")
         exit
 
-    fnames = os.walk(cur_dir)
+    fnames = os.walk(dst_dir)
     matchStr = '^(\S)*\.'+ stype + '$'
     stRe = re.compile(matchStr)
 
@@ -40,18 +40,18 @@ if __name__ == "__main__":
     for fn in fnames:
         for x in fn[2]:
             if sys.platform == "linux2":
-                if os.path.isfile(cur_dir) : #need modify
-                    if cur_dir[-1] != '/':
-                        res = stRe.match(cur_dir + "/" + x)
-                    else:
-                        res = stRe.match(cur_dir + x)
+                if dst_dir[-1] != '/':
+                    res = stRe.match(dst_dir + "/" + x)
+                else:
+                    res = stRe.match(dst_dir + x)
 
-                    if res:
+                if res:
+                    if os.path.isfile(res.group()):
                         aa = count_lines.count_line1(res.group(),stype)
                         l1 += aa[0]
                         l2 += aa[1]
                         l3 += aa[2]
-                else:
-                    print("dir " + cur_dir);
+                    else:
+                        print("dir " + dst_dir);
 
     print("source %d\ncomment %d\nempty %d" % (l1,l2,l3))
