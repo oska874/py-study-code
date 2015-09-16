@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*- 
 
 
+
+
+
 #usage: 
 #	count_lines.py filename
+#       count lines of source file
 
 import sys,os
 
@@ -12,23 +16,23 @@ def count_line1(fna,stype):
     fd1.close()
     return ret 
 
-
 def divide_lines(fd,ft):
     l1 = 0 # source
     l2 = 0 # comment
     l3 = 0 # empty
 
+    multi_comment = 0
     if ft == 'c' or ft == 'cpp':
-        multi_comment = 0
-#    print("this is c/c++ files")
         for line in fd:
+# strips space in line start and end 
+            line = line.strip()
             if len(line) > 1:
                 if multi_comment == 0:
                     # comment line start from "/*" or single line comment "//"
-                    if line[0] == '/' and line[1] == '*':
+                    if len(line) >= 2 and line[0] == '/' and line[1] == '*':
                         l2 += 1
                         multi_comment = 0
-                    elif line[0] == '/' and line[1] == '/':
+                    elif len(line) >= 2 and line[0] == '/' and line[1] == '/':
                         l2 += 1
                     else :
                         # source line
@@ -36,24 +40,35 @@ def divide_lines(fd,ft):
                 elif multi_comment == 1:
                     # comment line till meet "*/"
                     l2 += 1
-                    if line[-2] == '*' and line[-1] == '/':
+                    if len(line) >= 2 and line[-2] == '*' and line[-1] == '/':
                         multi_comment = 0
             else :
                 # empty line
                 l3 += 1
-#        print("source %d, comment %d, empty %d" % (l1,l2,l3))
     elif ft == 'py':
         for line in fd:
+            line = line.strip()
             if len(line) > 1:
-		if line[0] == '#':
-		    l2 += 1
-		else:
-		    l1 += 1
+                if multi_comment == 0:
+                    if line[0] == '#':
+                        l2 += 1
+                    elif len(line) == 3 and line[0] == '"' and line[1] == '"' and line[2] == '"':
+                        l2 += 1
+                        multi_comment = 1
+                    else:
+                        l1 += 1
+                elif multi_comment == 1:
+                    if len(line) == 3 and line[0] == '"' and line[1] == '"' and line[2] == '"':
+                        l2 += 1
+                        multi_comment = 0
+                    else:
+                        l2 += 1
 	    else:
 		l3 += 1
-        print("this is python files")
     else:
         print("not supported files "+ft)
+
+    print(l1,l2,l3)
     return (l1,l2,l3)
 
 if __name__ == "__main__":

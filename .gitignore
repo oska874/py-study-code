@@ -28,6 +28,7 @@ var/
 *.exe
 *.sw[pq]
 tags
+test.txt
 
 
 # PyInstaller
