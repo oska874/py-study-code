@@ -58,25 +58,13 @@ def divide_lines(fd,ft):
 
 if __name__ == "__main__":
     argn = len(sys.argv)
-    if argn < 2:
-        print("usage:python count_lines.py <filename>")
+    if argn < 4:
+        print("usage:python count_lines.py [t]<t> <filename>")
         exit
 
     #get filename
-    filename = sys.argv[1]
+    filename = sys.argv[3]
     print("source file: "+filename)
-
-    ln = 0
-    fd = open(filename,'r')
-    for line in fd:
-        if len(line) > 1:
-            ln+=1
-            fd.close()
-#           print(filename+"has %d lines" % ln);
-            if len(l2) > 1:
-                if l2[0] == '/' and l2[1] == '/':
-                        l1 += 0
-                elif l2[0] == '/' and l2[1] == '*':
-                        l1 += 0
-                else:
-                        l1 += 1
+    stype = sys.argv[2]
+    aa = count_line1(filename,stype)
+    print("source %d\ncomment %d\nempty %d\n" % aa)
