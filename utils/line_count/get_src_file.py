@@ -54,4 +54,4 @@ if __name__ == "__main__":
                     else:
                         print("dir " + dst_dir);
 
-    print("source %d\ncomment %d\nempty %d" % (l1,l2,l3))
+    print("source %d\ncomment %d\nempty %d\n" % (l1,l2,l3))
