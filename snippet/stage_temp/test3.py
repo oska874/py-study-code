@@ -5,3 +5,4 @@ for i in fd1:
     print(len(i))
     print(i)
     print("\n")
+fd1.close()
