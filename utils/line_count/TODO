@@ -1,6 +1,0 @@
-1. stage 0: counting non-empy lines in src file
-2. stage 1: divide non-empty lines into effective code line and comment line - first support C source code
-3. stage 2: support multiply directory and recursive searching
-4. stage 3: support multiply types of source code
-5. stage 4: support gui and publish alpha version 
-
