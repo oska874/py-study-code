@@ -11,10 +11,10 @@ for i in range(1,254):
 		os.system("arp -a >./ffff")
 		fd = open("./ffff",'r')
 		for x in fd:
-			if x.find("00-04-9f-03-ae-ef") :
+			if x.find("00-04-9f-03-ae-ef") >= 0 :
 				print(x)
 				fd.close()
-				os.system('rm ffff;rm aa')
+				os.system('rm ffff; rm aa')
 				exit()
 		fd.close()
 		os.system('rm ffff')
