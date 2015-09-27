@@ -9,4 +9,6 @@ string todo:
 
 5. difflib		: make different between two var/files ,base on hashtable
 
-(continue)
+Data Types
+advanced  types,such as time,calendar,collections,heapq,bisect,sets,etc.
+1. datatime
