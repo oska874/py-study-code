@@ -7,5 +7,6 @@ string todo:
 
 4. struct		: know how to convert and store c type vars in python
 
+5. difflib		: make different between two var/files ,base on hashtable
 
 (continue)
