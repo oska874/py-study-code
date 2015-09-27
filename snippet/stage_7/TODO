@@ -1,6 +1,11 @@
 string todo:
 1. basic string 		[x]
+
 2. regur expression	: know basic usage and method, should re-study in the future using
-3. stringIO		: know how to convert and store c type vars in python
-4. struct
+
+3. stringIO		: quick string
+
+4. struct		: know how to convert and store c type vars in python
+
+
 (continue)
