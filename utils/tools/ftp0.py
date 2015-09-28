@@ -1,5 +1,4 @@
 # -*- coding:utf-8 -*-
-
 from pyftpdlib.authorizers import DummyAuthorizer
 from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import FTPServer
@@ -9,9 +8,9 @@ def main():
     # Instantiate a dummy authorizer for managing 'virtual' users
     authorizer = DummyAuthorizer()
     # Define a new user having full r/w permissions
-    authorizer.add_user('test', 'test','./', perm='elradfmwM')
+    authorizer.add_user('', '','d:/vagrant/cagsdk', perm='elradfmwM')
     # Define a read-only anonymous user
-    authorizer.add_anonymous('./')
+    authorizer.add_anonymous('d:/vagrant/cagsdk')
  
     # Instantiate FTP handler class
     handler = FTPHandler
@@ -21,7 +20,7 @@ def main():
     handler.banner = "Welcome to Jayvic's FTP."
  
     # Instantiate FTP server class and listen on 127.0.0.1:21
-    address = ('127.0.0.1', 21)
+    address = ('0.0.0.0', 21)
     server = FTPServer(address, handler)
  
     # set a limit for connections
