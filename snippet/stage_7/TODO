@@ -1,0 +1,16 @@
+string todo:
+1. basic string 		[x]
+
+2. regur expression	: know basic usage and method, should re-study in the future using
+
+3. stringIO		: quick string
+
+4. struct		: know how to convert and store c type vars in python
+
+5. difflib		: make different between two var/files ,base on hashtable
+
+Data Types
+advanced  types,such as time,calendar,collections,heapq,bisect,sets,etc.
+1. datatime
+
+2. collections		:counter,ordereddict,nametuple,deque,defaultdict.
