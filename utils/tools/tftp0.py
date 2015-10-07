@@ -1,4 +1,4 @@
 import tftpy
 
-server = tftpy.TftpServer('d:/vagrant/cagsdk')
+server = tftpy.TftpServer('./')
 server.listen('0.0.0.0', 69)
