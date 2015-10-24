@@ -1,0 +1,6 @@
+py todo list:
+1. a simple tftp/ftp and tcp transmit client/server.
+2. write application with gui.
+3. add gui to current application and not tight coupling to gui.
+
+
