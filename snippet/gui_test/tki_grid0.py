@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 import Tkinter as tk
 import tkFont
 
