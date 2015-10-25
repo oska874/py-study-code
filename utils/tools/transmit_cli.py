@@ -24,7 +24,8 @@ def my_tftpd(ip=0,port=0):
 	#print("start tftp"+ip+":"+port)
 	if valid_port(port) == 0 and valid_ip(ip) == 0:
 		print("start tftpd : "+ip+":"+port)
-
+		server = tftp.TftpServer('./')
+		server.listen(ip,int(port))
 		return 0
 	else:
 		return -1
