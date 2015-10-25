@@ -10,3 +10,8 @@ TODO1
 1. get value of the widgt
 2. call callback and pass value to transmit function
 
+TODO2
+1. improvement regular expression to fit ip address and port
+2. add tftpd 
+3. get information about asynchronous program of python
+
