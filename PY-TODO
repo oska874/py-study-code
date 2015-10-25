@@ -12,6 +12,10 @@ TODO1
 
 TODO2
 1. improvement regular expression to fit ip address and port
-2. add tftpd 
+2. add tftpd/ftpd/httpd 
 3. get information about asynchronous program of python
+
+TODO3
+1. continue TODO2.1
+3. update gui
 
