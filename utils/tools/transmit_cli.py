@@ -1,6 +1,4 @@
 import tftpy as tftp
-import pyftpdlib as ftp
-import http as http
 import re
 import multiprocessing as mp
 
@@ -10,6 +8,11 @@ from pyftpdlib.authorizers import DummyAuthorizer
 from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import FTPServer
 from pyftpdlib.filesystems import AbstractedFS
+## http
+import sys
+import BaseHTTPServer
+from SimpleHTTPServer import SimpleHTTPRequestHandler
+
 
 ## global var ##
 tftpdOn = 0 
@@ -82,7 +85,15 @@ def start_transd(type,ip,port):
 	    # start ftp server
 	    server.serve_forever()
 	elif type == "http":
-		print("http")
+		HandlerClass = SimpleHTTPRequestHandler
+		ServerClass  = BaseHTTPServer.HTTPServer
+		Protocol     = "HTTP/1.0"
+		server_address = (ip,int(port))
+		HandlerClass.protocol_version = Protocol
+		httpd = ServerClass(server_address, HandlerClass)
+		sa = httpd.socket.getsockname()
+		print "Serving HTTP on", sa[0], "port", sa[1], "..."
+		httpd.serve_forever()
 
 ## tftp set##
 def my_tftpd(ip=0,port=0):
@@ -135,11 +146,27 @@ def my_ftpd2():
 
 ## http set ##
 def my_httpd(ip=0,port=0):
-	if valid_port(port) == 0 and valid_ip(ip) == 0:
-		print("start httpd : "+ip+":"+port)
-		return 0
-	else:
-		return -1
+	global httpdOn
+	global httpProcess
+	global processAll
+
+	if httpdOn == 0:
+		httpdOn = 2
+		if valid_port(port) == 0 and valid_ip(ip) == 0:
+			httpProcess = mp.Process(name='httpS', target=start_transd,args=("http",ip,port))
+			httpProcess.start()
+			processAll['httpS']=httpProcess
+			return 0
+		else:
+			return -1
+
+def my_httpd2():
+	global httpdOn
+	global httpProcess
+	if httpdOn == 2:
+		httpdOn = 0
+		stop_proc("httpS")
+	return 0
 
 
 ## socket set ##
