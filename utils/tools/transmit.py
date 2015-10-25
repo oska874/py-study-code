@@ -3,24 +3,32 @@ import tftpy as tftp
 import pyftpdlib as ftp
 import http as http
 
-def tftpdCall():
-	#print("start tftp"+tfipStr.get()+":"+tfportStr.get())
-	trans.my_tftpd(ip=tfipStr.get(), port=tfportStr.get())
+import transmit_cli
 
-def ftpdCall():
+def tftpdStartCall():
+	transmit_cli.my_tftpd(ip=tfipStr.get(), port=tfportStr.get())
+
+def tftpdStopCall():
+	transmit_cli.my_tftpd2()
+
+def ftpdStartCall():
 	#print("start ftp"+fipStr.get()+":"+fportStr.get())
-	trans.my_ftpd(ip=fipStr.get(), port=fportStr.get())
+	transmit_cli.my_ftpd(ip=fipStr.get(), port=fportStr.get())
+
+def ftpdStopCall():
+	#print("start ftp"+fipStr.get()+":"+fportStr.get())
+	transmit_cli.my_ftpd2()
 
 def httpdCall():
 	#print("start http"+hipStr.get()+":"+hportStr.get())
-	trans.my_httpd(ip=hipStr.get(), port=hportStr.get())
+	transmit_cli.my_httpd(ip=hipStr.get(), port=hportStr.get())
 
 def socketdCall():
 	#print("start socket"+sipStr.get()+":"+sportStr.get())
-	trans.my_socketd(ip=sipStr.get(), port=sportStr.get())
+	transmit_cli.my_socketd(ip=sipStr.get(), port=sportStr.get())
 
 
-import transmit_cli as trans
+
 
 if __name__ == "__main__":
 	root = tk.Tk()
@@ -46,8 +54,11 @@ if __name__ == "__main__":
 	ftpPort.insert(0,"20")
 	ftpPane.add(ftpPort)
 
-	ftpBtn = tk.Button(text="ftp start",width=10,command=ftpdCall,relief=tk.RAISED)
-	ftpPane.add(ftpBtn)
+	ftpBtnStart = tk.Button(text="ftp start",width=10,command=ftpdStartCall)
+	ftpPane.add(ftpBtnStart)
+
+	ftpBtnStop = tk.Button(text="stop",width=10,command=ftpdStopCall)
+	ftpPane.add(ftpBtnStop)
 
 #tftp
 	tftpPane = tk.PanedWindow(orient=tk.HORIZONTAL)
@@ -61,9 +72,11 @@ if __name__ == "__main__":
 	tftpPort.insert(0,"69")
 	tftpPane.add(tftpPort)
 
-	tftpBtn = tk.Button(text="tftp start",width=10,command=tftpdCall)
-	tftpPane.add(tftpBtn)
+	tftpBtnStart = tk.Button(text="tftp start",width=10,command=tftpdStartCall)
+	tftpPane.add(tftpBtnStart)
 
+	tftpBtnStop = tk.Button(text="stop",width=10,command=tftpdStopCall)
+	tftpPane.add(tftpBtnStop)
 #http
 	httpPane = tk.PanedWindow(orient=tk.HORIZONTAL)
 	httpPane.pack()
@@ -79,6 +92,8 @@ if __name__ == "__main__":
 	httpBtn = tk.Button(text="http start",width=10,command=httpdCall)
 	httpPane.add(httpBtn)
 
+	httpBtnStop = tk.Button(text="stop",width=10,command=httpdCall)
+	httpPane.add(httpBtnStop)
 #socket
 	socketPane = tk.PanedWindow(orient=tk.HORIZONTAL)
 	socketPane.pack()
@@ -93,5 +108,8 @@ if __name__ == "__main__":
 
 	socketBtn = tk.Button(text="socket start",width=10,command=socketdCall)
 	socketPane.add(socketBtn)
+
+	socketBtnStop = tk.Button(text="stop",width=10,command=socketdCall)
+	socketPane.add(socketBtnStop)
 
 	root.mainloop()
