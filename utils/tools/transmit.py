@@ -19,16 +19,15 @@ def ftpdStopCall():
 	#print("start ftp"+fipStr.get()+":"+fportStr.get())
 	transmit_cli.my_ftpd2()
 
-def httpdCall():
-	#print("start http"+hipStr.get()+":"+hportStr.get())
+def httpdStartCall():
 	transmit_cli.my_httpd(ip=hipStr.get(), port=hportStr.get())
+
+def httpdStopCall():
+	transmit_cli.my_httpd2()
 
 def socketdCall():
 	#print("start socket"+sipStr.get()+":"+sportStr.get())
 	transmit_cli.my_socketd(ip=sipStr.get(), port=sportStr.get())
-
-
-
 
 if __name__ == "__main__":
 	root = tk.Tk()
@@ -89,11 +88,12 @@ if __name__ == "__main__":
 	httpPort.insert(0,"80")
 	httpPane.add(httpPort)
 
-	httpBtn = tk.Button(text="http start",width=10,command=httpdCall)
+	httpBtn = tk.Button(text="http start",width=10,command=httpdStartCall)
 	httpPane.add(httpBtn)
 
-	httpBtnStop = tk.Button(text="stop",width=10,command=httpdCall)
+	httpBtnStop = tk.Button(text="stop",width=10,command=httpdStopCall)
 	httpPane.add(httpBtnStop)
+	
 #socket
 	socketPane = tk.PanedWindow(orient=tk.HORIZONTAL)
 	socketPane.pack()
