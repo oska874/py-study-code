@@ -49,10 +49,10 @@ def stop_proc(name):
 	processAll[name].terminate()
 
 
-def start_transd(type,ip,port):
+def start_transd(type,ip,port,local):
 	global tftpSer
 	if type == "tftp":
-		tftpSer = tftp.TftpServer('./')
+		tftpSer = tftp.TftpServer(local)
 		tftpSer.listen(ip,int(port))
 	elif type == "ftp":
 		# Instantiate a dummy authorizer for managing 'virtual' users
@@ -60,7 +60,7 @@ def start_transd(type,ip,port):
 	    # Define a new user having full r/w permissions
 	    authorizer.add_user('user_name', 'pass_word','./', perm='elradfmwM',msg_login='welcome',msg_quit='bye')
 	    # Define a read-only anonymous user
-	    authorizer.add_anonymous('./')
+	    authorizer.add_anonymous(local)
 	 
 	    # Instantiate FTP handler class
 	    handler = FTPHandler
@@ -80,7 +80,7 @@ def start_transd(type,ip,port):
 	    server.max_cons = 128 
 	    server.max_cons_per_ip = 2
 	 
-	    absfs = AbstractedFS(u"./",handler)
+	    absfs = AbstractedFS(unicode(local),handler)
 	    #absfs.cwd = u"/bbb/ss/"
 	    # start ftp server
 	    server.serve_forever()
@@ -96,7 +96,7 @@ def start_transd(type,ip,port):
 		httpd.serve_forever()
 
 ## tftp set##
-def my_tftpd(ip=0,port=0):
+def my_tftpd(ip=0,port=0,local="./"):
 	global tftpdOn
 	global tftpProcess
 	global processAll
@@ -104,7 +104,7 @@ def my_tftpd(ip=0,port=0):
 	if tftpdOn == 0:
 		tftpdOn = 2
 		if valid_port(port) == 0 and valid_ip(ip) == 0:
-			tftpProcess = mp.Process(name='tftpS', target=start_transd,args=("tftp",ip,port))
+			tftpProcess = mp.Process(name='tftpS', target=start_transd,args=("tftp",ip,port,local))
 			tftpProcess.start()
 			processAll['tftpS']=tftpProcess
 			return 0
@@ -121,15 +121,16 @@ def my_tftpd2():
 	return 0
 
 ## ftp set ##
-def my_ftpd(ip=0,port=0):
+def my_ftpd(ip=0,port=0,local="./"):
 	global ftpdOn
 	global ftpProcess
 	global processAll
 
 	if ftpdOn == 0:
+		print("111: "+local)
 		ftpdOn = 2
 		if valid_port(port) == 0 and valid_ip(ip) == 0:
-			ftpProcess = mp.Process(name='ftpS', target=start_transd,args=("ftp",ip,port))
+			ftpProcess = mp.Process(name='ftpS', target=start_transd,args=("ftp",ip,port,local))
 			ftpProcess.start()
 			processAll['ftpS']=ftpProcess
 			return 0
@@ -145,7 +146,7 @@ def my_ftpd2():
 	return 0
 
 ## http set ##
-def my_httpd(ip=0,port=0):
+def my_httpd(ip=0,port=0,local="./"):
 	global httpdOn
 	global httpProcess
 	global processAll
@@ -153,7 +154,7 @@ def my_httpd(ip=0,port=0):
 	if httpdOn == 0:
 		httpdOn = 2
 		if valid_port(port) == 0 and valid_ip(ip) == 0:
-			httpProcess = mp.Process(name='httpS', target=start_transd,args=("http",ip,port))
+			httpProcess = mp.Process(name='httpS', target=start_transd,args=("http",ip,port,local))
 			httpProcess.start()
 			processAll['httpS']=httpProcess
 			return 0
@@ -170,7 +171,7 @@ def my_httpd2():
 
 
 ## socket set ##
-def my_socketd(ip=0,port=0):
+def my_socketd(ip=0,port=0,local="./"):
 	if valid_port(port) == 0 and valid_ip(ip) == 0:
 		print("start socketd : "+ip+":"+port)
 		return 0
