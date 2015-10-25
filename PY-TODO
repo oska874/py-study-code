@@ -3,4 +3,10 @@ py todo list:
 2. write application with gui.
 3. add gui to current application and not tight coupling to gui.
 
+TODO0
+1. draw gui
+
+TODO1
+1. get value of the widgt
+2. call callback and pass value to transmit function
 
