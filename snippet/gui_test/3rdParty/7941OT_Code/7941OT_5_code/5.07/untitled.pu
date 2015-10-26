@@ -1,0 +1,41 @@
+   from multiprocessing import Process, Pipe
+   from threading import Thread
+   import time
+
+   Alive = True 
+
+   def listener_thread(conn): #listens for kill from main 
+        global Alive
+        while True:
+        data = conn.recv()
+        if data == "kill":
+           Alive = False #value for kill 
+           break
+
+    def subprocess(conn):
+        t = Thread(target=listener_thread, args=(conn,))
+        count = 0 
+        t.start()
+        while Alive:
+              print "Run number = %d" % count
+              count = count + 1 
+
+
+    def testprocess(conn):
+    t = Thread(target=listner_thread, args=(conn,))
+    count = 0 
+    t.start()
+    while Alive:
+          print "This is a different thread run = %d" % count
+          count = count + 1
+
+    parent_conn, child_conn = Pipe()
+    p = Process(target=subprocess, args=(child_conn,))
+    p2 = Process(target=testprocess, args=(child_conn,))
+    runNum = int(raw_input("Enter a number: ")) 
+    p.start()
+    p2.start()
+    time.sleep(runNum) 
+    parent_conn.send("kill") #sends kill to listener thread to tell them when to stop
+    p.join()
+    p2.join()
