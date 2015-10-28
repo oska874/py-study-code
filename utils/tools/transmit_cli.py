@@ -2,6 +2,7 @@ import tftpy as tftp
 import re
 import multiprocessing as mp
 import threading
+import time
 
 ## ftp
 from pyftpdlib.authorizers import DummyAuthorizer
@@ -13,6 +14,8 @@ import sys
 import BaseHTTPServer
 from SimpleHTTPServer import SimpleHTTPRequestHandler
 
+##socket
+import socket
 
 ## global var ##
 tftpdOn = 0 
@@ -28,6 +31,11 @@ httpSer = 0
 httpProcess = 0
 
 socketdOn = 0
+socketdProcess = 0
+socketSer = 0
+conSer = 0
+SOC_S = True
+
 processAll = {}
 
 ## comman func ##
@@ -39,7 +47,6 @@ def valid_ip(ip):
 	else:
 		return -1
 
-
 def valid_port(port):
 	portRe = re.compile("[0-9]+$")
 	if portRe.match(port) != None:
@@ -47,19 +54,23 @@ def valid_port(port):
 		return 0
 	else:
 		return -1
+
 def stop_proc(name):
 	global processAll
 	processAll[name].terminate()
 
-
-def start_transd(type,ip,port,local):
+def start_transd(type1,ip,port,local):
 	global tftpSer
 	global ftpSer
 	global httpSer
-	if type == "tftp":
+	global socketSer
+	global conSer
+	global SOC_S
+	print(type1,ip,port,local)
+	if type1 == "tftp":
 		tftpSer = tftp.TftpServer(local)
 		tftpSer.listen(ip,int(port))
-	elif type == "ftp":
+	elif type1 == "ftp":
 		# Instantiate a dummy authorizer for managing 'virtual' users
 	    authorizer = DummyAuthorizer()
 	    # Define a new user having full r/w permissions
@@ -89,7 +100,7 @@ def start_transd(type,ip,port,local):
 	    #absfs.cwd = u"/bbb/ss/"
 	    # start ftp server
 	    ftpSer.serve_forever()
-	elif type == "http":
+	elif type1 == "http":
 		HandlerClass = SimpleHTTPRequestHandler
 		ServerClass  = BaseHTTPServer.HTTPServer
 		Protocol     = "HTTP/1.0"
@@ -99,6 +110,24 @@ def start_transd(type,ip,port,local):
 		sa = httpSer.socket.getsockname()
 		print "Serving HTTP on", sa[0], "port", sa[1], "..."
 		httpSer.serve_forever()
+	elif type1 == "socket":
+		#tcp
+		socketSer = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		bi = socketSer.bind((ip,int(port)))
+		socketSer.listen(2)
+		conSer,addr = socketSer.accept()
+		while SOC_S == True:
+			try:
+				conSer.send("hello world")
+				rcv = conSer.recv(100)
+				print(rcv)
+				time.sleep(3)
+			except Exception, e:
+				conSer.close()
+				print("s1 error")
+				break
+		print("socket close")
+		conSer.close()
 
 ## tftp set##
 def my_tftpd(ip=0,port=0,local="./"):
@@ -167,7 +196,6 @@ def my_httpd(ip=0,port=0,local="./"):
 	if httpdOn == 0:
 		httpdOn = 2
 		if valid_port(port) == 0 and valid_ip(ip) == 0:
-			#httpProcess = mp.Process(name='httpS', target=start_transd,args=("http",ip,port,local))
 			httpProcess = threading.Thread( target=start_transd,name='httpS',args=("http",ip,port,local))
 			httpProcess.start()
 			processAll['httpS']=httpProcess
@@ -177,19 +205,71 @@ def my_httpd(ip=0,port=0,local="./"):
 
 def my_httpd2():
 	global httpdOn
-	global httpProcess
+	global httpSer
 	if httpdOn == 2:
 		httpdOn = 0
-		#stop_proc("httpS")
 		httpSer.server_close()
 	return 0
 
-
 ## socket set ##
 def my_socketd(ip=0,port=0,local="./"):
-	if valid_port(port) == 0 and valid_ip(ip) == 0:
-		print("start socketd : "+ip+":"+port)
-		return 0
-	else:
-		return -1
+	global socketdProcess
+	global socketdOn
+	global SOC_S
+	if socketdOn == 0:
+		socketdOn = 2
+		if valid_port(port) == 0 and valid_ip(ip) == 0:
+			print("start socketd : "+ip+":"+port)
+			SOC_S = True
+			socketdProcess = threading.Thread( target=start_transd,name='socketS',args=("socket",ip,port,local))
+			socketdProcess.start()
+			processAll["socketS"]=socketdProcess
+			return 0
+		else:
+			return -1
 
+def my_socketd2():
+	global conSer
+	global socketdOn
+	global SOC_S
+	if socketdOn == 2:
+		socketdOn = 0
+		SOC_S = False
+
+##client
+
+def send_data(types,ip,port,local):
+	if types == "socket":
+		#tcp
+		print(ip,port,local)
+		lens = 1024
+		c1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		try:
+			c1.connect((ip,int(port)))
+		except Exception,e:
+			c1.close()
+			print("c1 ",e)
+
+		while lens >0:
+			try:
+				rcv = c1.recv(100)
+				print(rcv,len(rcv))
+				lens -= len(rcv)
+				c1.send("nice to meet you")
+			except Exception, e:
+				c1.close()
+				print("c1 error,",e)
+				break
+		print("send finish")	
+		c1.close()
+	elif types == "tftp":
+		pass
+
+def my_socketcli(ip=0,port=0,local="./"):
+	if valid_port(port) == 0 and valid_ip(ip) == 0:
+		#first step:just send string to server,next step read file and send to server
+		socketSendThread=threading.Thread(target=send_data,args=("socket",ip,port,local))
+		socketSendThread.start()
+
+def my_tftpcli(ip=0,port=0,local="./"):
+	pass

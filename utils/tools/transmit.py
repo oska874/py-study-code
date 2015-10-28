@@ -5,9 +5,11 @@ import transmit_cli
 ## callback
 def selectTftpFold():
 	global tfoldStr
+	global infoTxtStr
 	dir = tkFileDialog.askdirectory()
 	if dir != "" :
 		tfoldStr.set(dir)
+		infoTxtStr.set(dir)
 	else:
 		tfoldStr.set(u"./")
 
@@ -34,6 +36,7 @@ def selectSocketFold():
 		sfoldStr.set(dir)
 	else:
 		sfoldStr.set(u"./")
+
 
 ###
 # tftp
@@ -62,9 +65,41 @@ def httpdStopCall():
 	transmit_cli.my_httpd2()
 
 #socket
-def socketdCall():
+def socketdStartCall():
 	global sfoldStr
 	transmit_cli.my_socketd(ip=sipStr.get(), port=sportStr.get(),local=sfoldStr.get())
+
+def socketdStopCall():
+	global sfoldStr
+	transmit_cli.my_socketd2()
+
+## client func
+def selectSocketFold2():
+	global sfoldStr2
+	dir = tkFileDialog.askopenfilename()
+	if dir != "":
+		sfoldStr2.set(dir)
+		infoTxtStr.set(dir)
+	else:
+		sfoldStr2.set(u"./")
+
+def selectTftpFold2():
+	global tfoldStr2
+	global infoTxtStr
+	dir = tkFileDialog.askopenfilename()
+	if dir != "" :
+		tfoldStr2.set(dir)
+		infoTxtStr.set(dir)
+	else:
+		tfoldStr2.set(u"./")
+
+def socketdStartCall2():
+	global sfoldStr2
+	transmit_cli.my_socketcli(ip=sipStr2.get(), port=sportStr2.get(),local=sfoldStr2.get())
+
+def tftpdStartCall2():
+	global tfoldStr2
+	transmit_cli.my_tftpcli(ip=tfipStr2.get(), port=tfportStr2.get(),local=tfoldStr2.get())
 
 ## main ##
 if __name__ == "__main__":
@@ -87,6 +122,13 @@ if __name__ == "__main__":
 	sipStr=tk.StringVar()
 	sportStr=tk.StringVar()
 	sfoldStr=tk.StringVar()
+
+	infoTxtStr=tk.StringVar()
+
+## server
+	divid0 = tk.PanedWindow(orient=tk.HORIZONTAL)
+	divid0.add(tk.Label(width=100,justify='left',text="Server Part"))
+	divid0.pack()
 
 #ftp
 	ftpPane = tk.PanedWindow(orient=tk.HORIZONTAL)
@@ -172,7 +214,7 @@ if __name__ == "__main__":
 	socketPane.add(socketIp)
 
 	socketPort = tk.Entry(socketPane, bd =5,textvariable=sportStr)
-	socketPort.insert(0,"1080")
+	socketPort.insert(0,"1083")
 	socketPane.add(socketPort)
 
 	socketFold = tk.Entry(socketPane, bd =5,textvariable=sfoldStr)
@@ -182,15 +224,74 @@ if __name__ == "__main__":
 	socketBtnSel = tk.Button(text="select fold",width=10,command=selectSocketFold)
 	socketPane.add(socketBtnSel)
 
-	socketBtn = tk.Button(text="socket start",width=10,command=socketdCall)
+	socketBtn = tk.Button(text="socket start",width=10,command=socketdStartCall)
 	socketPane.add(socketBtn)
 
-	socketBtnStop = tk.Button(text="stop",width=10,command=socketdCall)
+	socketBtnStop = tk.Button(text="stop",width=10,command=socketdStopCall)
 	socketPane.add(socketBtnStop)
+
+## client
+	sipStr2=tk.StringVar()
+	sportStr2=tk.StringVar()
+	sfoldStr2=tk.StringVar()
+
+	tfipStr2=tk.StringVar()
+	tfportStr2=tk.StringVar()
+	tfoldStr2=tk.StringVar()
+
+	divid1 = tk.PanedWindow(orient=tk.HORIZONTAL)
+	divid1.add(tk.Label(width=100,justify='left',text="Client Part"))
+	divid1.pack()
+#socket client
+	socketPane2 = tk.PanedWindow(orient=tk.HORIZONTAL)
+	socketPane2.pack()
+
+	socketIp2 = tk.Entry(socketPane2, bd =5,textvariable=sipStr2)
+	socketIp2.insert(0,"127.0.0.1")
+	socketPane2.add(socketIp2)
+
+	socketPort2 = tk.Entry(socketPane2, bd =5,textvariable=sportStr2)
+	socketPort2.insert(0,"1082")
+	socketPane2.add(socketPort2)
+
+	socketFold2 = tk.Entry(socketPane2, bd =5,textvariable=sfoldStr2)
+	socketFold2.insert(0,"./")
+	socketPane2.add(socketFold2)
+	
+	socketBtnSel2 = tk.Button(text="select file",width=10,command=selectSocketFold2)
+	socketPane2.add(socketBtnSel2)
+
+	socketBtn2 = tk.Button(text="socket send",width=10,command=socketdStartCall2)
+	socketPane2.add(socketBtn2)
+
+#tftp client
+	tftpPane2 = tk.PanedWindow(orient=tk.HORIZONTAL)
+	tftpPane2.pack()
+
+	tftpIp2 = tk.Entry(tftpPane2, bd =5,textvariable=tfipStr2)
+	tftpIp2.insert(0,"0.0.0.0")
+	tftpPane2.add(tftpIp2)
+
+	tftpPort2 = tk.Entry(tftpPane2, bd =5,textvariable=tfportStr2)
+	tftpPort2.insert(0,"69")
+	tftpPane2.add(tftpPort2)
+
+	tftpFold2 = tk.Entry(tftpPane2, bd =5,textvariable=tfoldStr2)
+	tftpFold2.insert(0,"./")
+	tftpPane2.add(tftpFold2)
+
+	tftpBtnSel2 = tk.Button(text="select file",width=10,command=selectTftpFold2)
+	tftpPane2.add(tftpBtnSel2)
+
+	tftpBtnStart2 = tk.Button(text="tftp start",width=10,command=tftpdStartCall2)
+	tftpPane2.add(tftpBtnStart2)
+
 
 ## info
 	infoPane = tk.PanedWindow(orient=tk.HORIZONTAL)
 	infoPane.pack()
 
+	infoText = tk.Label(width=100,justify='left',textvariable=infoTxtStr)
+	infoPane.add(infoText)
 
 	root.mainloop()
