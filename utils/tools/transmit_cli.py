@@ -1,7 +1,7 @@
 import tftpy as tftp
 import re
 import multiprocessing as mp
-
+import threading
 
 ## ftp
 from pyftpdlib.authorizers import DummyAuthorizer
@@ -104,7 +104,9 @@ def my_tftpd(ip=0,port=0,local="./"):
 	if tftpdOn == 0:
 		tftpdOn = 2
 		if valid_port(port) == 0 and valid_ip(ip) == 0:
-			tftpProcess = mp.Process(name='tftpS', target=start_transd,args=("tftp",ip,port,local))
+			#tftpProcess = mp.Process(name='tftpS', target=start_transd,args=("tftp",ip,port,local))
+			#tftpProcess.start()
+			tftpProcess = threading.Thread(target=start_transd,name='tftpS',args=("tftp",ip,port,local))
 			tftpProcess.start()
 			processAll['tftpS']=tftpProcess
 			return 0
@@ -127,10 +129,13 @@ def my_ftpd(ip=0,port=0,local="./"):
 	global processAll
 
 	if ftpdOn == 0:
-		print("111: "+local)
+		#print("111: "+local)
+		#print("ip %s port %s " % (ip,port))
 		ftpdOn = 2
 		if valid_port(port) == 0 and valid_ip(ip) == 0:
-			ftpProcess = mp.Process(name='ftpS', target=start_transd,args=("ftp",ip,port,local))
+			#ftpProcess = mp.Process(name='ftpS', target=start_transd,args=("ftp",ip,port,local))
+			#ftpProcess.start()
+			ftpProcess = threading.Thread(target=start_transd,name='ftpS',args=("ftp",ip,port,local))
 			ftpProcess.start()
 			processAll['ftpS']=ftpProcess
 			return 0
@@ -154,7 +159,8 @@ def my_httpd(ip=0,port=0,local="./"):
 	if httpdOn == 0:
 		httpdOn = 2
 		if valid_port(port) == 0 and valid_ip(ip) == 0:
-			httpProcess = mp.Process(name='httpS', target=start_transd,args=("http",ip,port,local))
+			#httpProcess = mp.Process(name='httpS', target=start_transd,args=("http",ip,port,local))
+			httpProcess = threading.Thread( target=start_transd,name='httpS',args=("http",ip,port,local))
 			httpProcess.start()
 			processAll['httpS']=httpProcess
 			return 0
