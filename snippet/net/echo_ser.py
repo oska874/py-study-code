@@ -23,10 +23,10 @@ for res in socket.getaddrinfo(HOST, PORT, socket.AF_UNSPEC,
     break
     
 if s is None:
-    print ('could not open socket')
+    print ('ser: could not open socket')
     sys.exit(1)
 conn, addr = s.accept()
-print 'Connected by', addr
+print('ser: Connected by', addr)
 while 1:
     data = conn.recv(1024)
     if not data: break

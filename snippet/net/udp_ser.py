@@ -2,7 +2,6 @@ import socket
 import sys,os,time
 
 #udp
-
 s1 = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 s1.bind(("localhost",8082))
