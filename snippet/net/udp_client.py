@@ -2,7 +2,6 @@ import socket
 import sys,os,time
 
 #udp
-
 c1 = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 while True:

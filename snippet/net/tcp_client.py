@@ -2,15 +2,13 @@ import socket
 import sys,os,time
 
 #tcp
-
 c1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 try:
-	c1.connect(("localhost",8082))
+	c1.connect(("localhost",1084))
 except Exception,e:
 	c1.close()
 	print("c1 1 1")
-
 
 while True:
 	try:
