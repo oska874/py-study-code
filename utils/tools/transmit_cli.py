@@ -24,6 +24,9 @@ ftpSer = 0
 ftpProcess = 0
 
 httpdOn = 0
+httpSer = 0
+httpProcess = 0
+
 socketdOn = 0
 processAll = {}
 
@@ -51,6 +54,8 @@ def stop_proc(name):
 
 def start_transd(type,ip,port,local):
 	global tftpSer
+	global ftpSer
+	global httpSer
 	if type == "tftp":
 		tftpSer = tftp.TftpServer(local)
 		tftpSer.listen(ip,int(port))
@@ -74,26 +79,26 @@ def start_transd(type,ip,port,local):
 	 
 	    # Instantiate FTP server class and listen on 127.0.0.1:21
 	    address = (ip, int(port))
-	    server = FTPServer(address, handler)
+	    ftpSer = FTPServer(address, handler)
 	 
 	    # set a limit for connections
-	    server.max_cons = 128 
-	    server.max_cons_per_ip = 2
+	    ftpSer.max_cons = 128 
+	    ftpSer.max_cons_per_ip = 2
 	 
 	    absfs = AbstractedFS(unicode(local),handler)
 	    #absfs.cwd = u"/bbb/ss/"
 	    # start ftp server
-	    server.serve_forever()
+	    ftpSer.serve_forever()
 	elif type == "http":
 		HandlerClass = SimpleHTTPRequestHandler
 		ServerClass  = BaseHTTPServer.HTTPServer
 		Protocol     = "HTTP/1.0"
 		server_address = (ip,int(port))
 		HandlerClass.protocol_version = Protocol
-		httpd = ServerClass(server_address, HandlerClass)
-		sa = httpd.socket.getsockname()
+		httpSer = ServerClass(server_address, HandlerClass)
+		sa = httpSer.socket.getsockname()
 		print "Serving HTTP on", sa[0], "port", sa[1], "..."
-		httpd.serve_forever()
+		httpSer.serve_forever()
 
 ## tftp set##
 def my_tftpd(ip=0,port=0,local="./"):
@@ -119,7 +124,8 @@ def my_tftpd2():
 	global tftpProcess
 	if tftpdOn == 2:
 		tftpdOn = 0
-		stop_proc("tftpS")
+		#stop_proc("tftpS")
+		tftpSer.stop()
 	return 0
 
 ## ftp set ##
@@ -145,9 +151,11 @@ def my_ftpd(ip=0,port=0,local="./"):
 def my_ftpd2():
 	global ftpdOn
 	global ftpProcess
+	global ftpSer
 	if ftpdOn == 2:
 		ftpdOn = 0
-		stop_proc("ftpS")
+		#stop_proc("ftpS")
+		ftpSer.close_all()
 	return 0
 
 ## http set ##
@@ -172,7 +180,8 @@ def my_httpd2():
 	global httpProcess
 	if httpdOn == 2:
 		httpdOn = 0
-		stop_proc("httpS")
+		#stop_proc("httpS")
+		httpSer.server_close()
 	return 0
 
 
