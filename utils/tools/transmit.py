@@ -42,7 +42,8 @@ def selectSocketFold():
 # tftp
 def tftpdStartCall():
 	global tfoldStr
-	transmit_cli.my_tftpd(ip=tfipStr.get(), port=tfportStr.get(),local=tfoldStr.get())
+	if tfoldStr.get() != "":
+		transmit_cli.my_tftpd(ip=tfipStr.get(), port=tfportStr.get(),local=tfoldStr.get())
 
 def tftpdStopCall():
 	transmit_cli.my_tftpd2()
@@ -50,7 +51,8 @@ def tftpdStopCall():
 # ftp
 def ftpdStartCall():
 	global ffoldStr
-	transmit_cli.my_ftpd(ip=fipStr.get(), port=fportStr.get(),local=ffoldStr.get())
+	if ffoldStr.get() != "":
+		transmit_cli.my_ftpd(ip=fipStr.get(), port=fportStr.get(),local=ffoldStr.get())
 	print ffoldStr.get()
 	
 def ftpdStopCall():
@@ -150,10 +152,10 @@ if __name__ == "__main__":
 	ftpFold.insert(0,"./")
 	ftpPane.add(ftpFold)
 
-	ftpBtnSel = tk.Button(text="select fold",width=10,command=selectFtpFold)
+	ftpBtnSel = tk.Button(text="select fold",width=15,command=selectFtpFold)
 	ftpPane.add(ftpBtnSel)
 
-	ftpBtnStart = tk.Button(text="ftp start",width=10,command=ftpdStartCall)
+	ftpBtnStart = tk.Button(text="ftp start",width=15,command=ftpdStartCall)
 	ftpPane.add(ftpBtnStart)
 
 	ftpBtnStop = tk.Button(text="stop",width=10,command=ftpdStopCall)
@@ -175,10 +177,10 @@ if __name__ == "__main__":
 	tftpFold.insert(0,"./")
 	tftpPane.add(tftpFold)
 
-	tftpBtnSel = tk.Button(text="select fold",width=10,command=selectTftpFold)
+	tftpBtnSel = tk.Button(text="select fold",width=15,command=selectTftpFold)
 	tftpPane.add(tftpBtnSel)
 
-	tftpBtnStart = tk.Button(text="tftp start",width=10,command=tftpdStartCall)
+	tftpBtnStart = tk.Button(text="tftp start",width=15,command=tftpdStartCall)
 	tftpPane.add(tftpBtnStart)
 
 	tftpBtnStop = tk.Button(text="stop",width=10,command=tftpdStopCall)
@@ -196,14 +198,14 @@ if __name__ == "__main__":
 	httpPort.insert(0,"80")
 	httpPane.add(httpPort)
 
-	httpFold = tk.Entry(httpPane, bd =5,textvariable=hfoldStr)
-	httpFold.insert(0,"no use")
-	httpPane.add(httpFold)
+	# httpFold = tk.Entry(httpPane, bd =5,textvariable=hfoldStr)
+	# httpFold.insert(0,"no use")
+	# httpPane.add(httpFold)
 	
-	httpBtnSel = tk.Button(text="select fold",width=10,command=selectHttpFold)
-	httpPane.add(httpBtnSel)
+	# httpBtnSel = tk.Button(text="select fold",width=10,command=selectHttpFold)
+	# httpPane.add(httpBtnSel)
 
-	httpBtn = tk.Button(text="http start",width=10,command=httpdStartCall)
+	httpBtn = tk.Button(text="http start",width=15,command=httpdStartCall)
 	httpPane.add(httpBtn)
 
 	httpBtnStop = tk.Button(text="stop",width=10,command=httpdStopCall)
@@ -225,10 +227,10 @@ if __name__ == "__main__":
 	socketFold.insert(0,"./")
 	socketPane.add(socketFold)
 	
-	socketBtnSel = tk.Button(text="select fold",width=10,command=selectSocketFold)
+	socketBtnSel = tk.Button(text="select fold",width=15, command=selectSocketFold)
 	socketPane.add(socketBtnSel)
 
-	socketBtn = tk.Button(text="socket start",width=10,command=socketdStartCall)
+	socketBtn = tk.Button(text="socket start",width=15,command=socketdStartCall)
 	socketPane.add(socketBtn)
 
 	socketBtnStop = tk.Button(text="stop",width=10,command=socketdStopCall)
@@ -255,17 +257,17 @@ if __name__ == "__main__":
 	socketPane2.add(socketIp2)
 
 	socketPort2 = tk.Entry(socketPane2, bd =5,textvariable=sportStr2)
-	socketPort2.insert(0,"1082")
+	socketPort2.insert(0,"1083")
 	socketPane2.add(socketPort2)
 
 	socketFold2 = tk.Entry(socketPane2, bd =5,textvariable=sfoldStr2)
 	socketFold2.insert(0,"./")
 	socketPane2.add(socketFold2)
 	
-	socketBtnSel2 = tk.Button(text="select file",width=10,command=selectSocketFold2)
+	socketBtnSel2 = tk.Button(text="select file",width=15,command=selectSocketFold2)
 	socketPane2.add(socketBtnSel2)
 
-	socketBtn2 = tk.Button(text="socket send",width=10,command=socketdStartCall2)
+	socketBtn2 = tk.Button(text="socket send",width=15,command=socketdStartCall2)
 	socketPane2.add(socketBtn2)
 
 #tftp client
@@ -281,13 +283,13 @@ if __name__ == "__main__":
 	tftpPane2.add(tftpPort2)
 
 	tftpFold2 = tk.Entry(tftpPane2, bd =5,textvariable=tfoldStr2)
-	tftpFold2.insert(0,"./")
+	tftpFold2.insert(0,"")
 	tftpPane2.add(tftpFold2)
 
-	tftpBtnSel2 = tk.Button(text="select file",width=10,command=selectTftpFold2)
+	tftpBtnSel2 = tk.Button(text="select file",width=15,command=selectTftpFold2)
 	tftpPane2.add(tftpBtnSel2)
 
-	tftpBtnStart2 = tk.Button(text="upload",width=10,command=tftpdStartCall2)
+	tftpBtnStart2 = tk.Button(text="upload",width=15,command=tftpdStartCall2)
 	tftpPane2.add(tftpBtnStart2)
 
 	tftpBtnStart3 = tk.Button(text="download",width=10,command=tftpdStartCall3)

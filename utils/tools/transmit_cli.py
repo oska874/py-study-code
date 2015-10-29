@@ -118,10 +118,10 @@ def start_transd(type1,ip,port,local):
 		conSer,addr = socketSer.accept()
 		while SOC_S == True:
 			try:
-				conSer.send("hello world")
-				rcv = conSer.recv(100)
+				conSer.send("hi")
+				rcv = conSer.recv(10240)
 				print(rcv)
-				time.sleep(3)
+				#time.sleep(3)
 			except Exception, e:
 				conSer.close()
 				print("s1 error")
@@ -249,27 +249,34 @@ def send_data(types,ip,port,local):
 		except Exception,e:
 			c1.close()
 			print("c1 ",e)
-
-		while lens >0:
+		#print("C:/Users/zl/Documents/GitHub/py-study-code/utils/tools/xxx.txt")
+		f = open(local,'r')
+		for x in f:
 			try:
 				rcv = c1.recv(100)
-				print(rcv,len(rcv))
-				lens -= len(rcv)
-				c1.send("nice to meet you")
+				c1.send(x) ## must change the send amount
 			except Exception, e:
+				f.close()
 				c1.close()
 				print("c1 error,",e)
 				break
-		print("send finish")	
+		f.close()
 		c1.close()
+		print("send finish")	
 	elif types == "tftpdown":
 		#tftp download
-		down1 = tftp.TftpClient(ip,int(port))
-		down1.download("xxx.txt","xxx")
+		try:
+			down1 = tftp.TftpClient(ip,int(port))
+			down1.download("xxx.txt","xxx")
+		except Exception, e:
+			print(e)
 	elif types == "tftpup":
 		#tftp upload
-		up1 = tftp.TftpClient(ip,int(port))
-		up1.upload("xxx2","xxx")
+		try:			
+			up1 = tftp.TftpClient(ip,int(port))
+			up1.upload("xxx2","xxx")
+		except Exception,e:
+			print(e)
 
 
 def my_socketcli(ip=0,port=0,local="./"):
