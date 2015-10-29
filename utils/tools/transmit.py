@@ -99,7 +99,11 @@ def socketdStartCall2():
 
 def tftpdStartCall2():
 	global tfoldStr2
-	transmit_cli.my_tftpcli(ip=tfipStr2.get(), port=tfportStr2.get(),local=tfoldStr2.get())
+	transmit_cli.my_tftpcliup(ip=tfipStr2.get(), port=tfportStr2.get(),local=tfoldStr2.get())
+
+def tftpdStartCall3():
+	global tfoldStr2
+	transmit_cli.my_tftpclidown(ip=tfipStr2.get(), port=tfportStr2.get(),local=tfoldStr2.get())
 
 ## main ##
 if __name__ == "__main__":
@@ -269,7 +273,7 @@ if __name__ == "__main__":
 	tftpPane2.pack()
 
 	tftpIp2 = tk.Entry(tftpPane2, bd =5,textvariable=tfipStr2)
-	tftpIp2.insert(0,"0.0.0.0")
+	tftpIp2.insert(0,"127.0.0.1")
 	tftpPane2.add(tftpIp2)
 
 	tftpPort2 = tk.Entry(tftpPane2, bd =5,textvariable=tfportStr2)
@@ -283,9 +287,11 @@ if __name__ == "__main__":
 	tftpBtnSel2 = tk.Button(text="select file",width=10,command=selectTftpFold2)
 	tftpPane2.add(tftpBtnSel2)
 
-	tftpBtnStart2 = tk.Button(text="tftp start",width=10,command=tftpdStartCall2)
+	tftpBtnStart2 = tk.Button(text="upload",width=10,command=tftpdStartCall2)
 	tftpPane2.add(tftpBtnStart2)
 
+	tftpBtnStart3 = tk.Button(text="download",width=10,command=tftpdStartCall3)
+	tftpPane2.add(tftpBtnStart3)
 
 ## info
 	infoPane = tk.PanedWindow(orient=tk.HORIZONTAL)

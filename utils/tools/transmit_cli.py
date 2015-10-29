@@ -262,8 +262,15 @@ def send_data(types,ip,port,local):
 				break
 		print("send finish")	
 		c1.close()
-	elif types == "tftp":
-		pass
+	elif types == "tftpdown":
+		#tftp download
+		down1 = tftp.TftpClient(ip,int(port))
+		down1.download("xxx.txt","xxx")
+	elif types == "tftpup":
+		#tftp upload
+		up1 = tftp.TftpClient(ip,int(port))
+		up1.upload("xxx2","xxx")
+
 
 def my_socketcli(ip=0,port=0,local="./"):
 	if valid_port(port) == 0 and valid_ip(ip) == 0:
@@ -271,5 +278,16 @@ def my_socketcli(ip=0,port=0,local="./"):
 		socketSendThread=threading.Thread(target=send_data,args=("socket",ip,port,local))
 		socketSendThread.start()
 
-def my_tftpcli(ip=0,port=0,local="./"):
+def my_tftpcliup(ip=0,port=0,local="./"):
+	if valid_port(port) == 0 and valid_ip(ip) == 0:
+		#first step:just send string to server,next step read file and send to server
+		tftpSendThread=threading.Thread(target=send_data,args=("tftpup",ip,port,local))
+		tftpSendThread.start()
+	pass
+
+def my_tftpclidown(ip=0,port=0,local="./"):
+	if valid_port(port) == 0 and valid_ip(ip) == 0:
+		#first step:just send string to server,next step read file and send to server
+		tftpSendThread=threading.Thread(target=send_data,args=("tftpdown",ip,port,local))
+		tftpSendThread.start()
 	pass
