@@ -244,13 +244,19 @@ def send_data(types,ip,port,local):
 		print(ip,port,local)
 		lens = 1024
 		c1 = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
 		try:
 			c1.connect((ip,int(port)))
 		except Exception,e:
 			c1.close()
 			print("c1 ",e)
-		#print("C:/Users/zl/Documents/GitHub/py-study-code/utils/tools/xxx.txt")
-		f = open(local,'r')
+
+		try:
+			f = open(local,'r')
+		except Exception,e:
+			c1.close()
+			print("open file fail: ",e)
+
 		for x in f:
 			try:
 				rcv = c1.recv(100)
@@ -260,21 +266,25 @@ def send_data(types,ip,port,local):
 				c1.close()
 				print("c1 error,",e)
 				break
+
 		f.close()
 		c1.close()
 		print("send finish")	
+
 	elif types == "tftpdown":
 		#tftp download
 		try:
+			print(local)
 			down1 = tftp.TftpClient(ip,int(port))
-			down1.download("xxx.txt","xxx")
+			down1.download(str(local),"temp_down")
 		except Exception, e:
 			print(e)
+
 	elif types == "tftpup":
 		#tftp upload
 		try:			
 			up1 = tftp.TftpClient(ip,int(port))
-			up1.upload("xxx2","xxx")
+			up1.upload("temp_up",str(local))
 		except Exception,e:
 			print(e)
 
