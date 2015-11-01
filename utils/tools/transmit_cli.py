@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-
 import tftpy as tftp
 import re
 import multiprocessing as mp
