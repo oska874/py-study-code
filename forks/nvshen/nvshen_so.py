@@ -1,18 +1,22 @@
-#!/usr/bin/python
-
+# -*- coding:utf-8 -*-
 import urllib2
 import sys,os
+import threading
 from urllib2 import HTTPError
 
-import threading
+# download adult text form caoliu
+# three step:
+#   1. get local file path and remote path
+#   2. download file
+#   3. save to local
 
 if os.name == 'posix':
-    basePath ="/tmp/vnshen_so/"
+    basePath ="/tmp/nv"
 else:
-    basePath =r"d:\tmp"
+    basePath =r"d:\tmp\nv"
 
-baseUrl = "http://www.nvshen.so/wp-content/uploads/2015/"
-baseUrl = "http://cl.exocl.net/htm_data/20/" #1511/1700971.html"
+#baseUrl = "http://www.nvshen.so/wp-content/uploads/2015/"
+baseUrl = "http://cl.exocl.net/htm_data/20/"
 
 threads = []
 
@@ -23,8 +27,6 @@ if(os.path.exists(basePath) == False):
         
 def getLocalPath(mon):
     childPath = basePath + "\\" + mon
-    #if(os.path.exists(childPath) == False):
-    #    os.mkdir(childPath)
     return childPath
 
 def getUrlPath(mon):
@@ -33,7 +35,6 @@ def getUrlPath(mon):
 
 def downloadResToLocal(url1,localPath):
     try:
-        #print(url1)
         request = urllib2.Request(url1)
         request.add_header("User-Agent","fake-client")
         response = urllib2.urlopen(request)
@@ -43,28 +44,27 @@ def downloadResToLocal(url1,localPath):
     except HTTPError:
         pass
 
-def download(tmpPath,tmpUrl):
-    localPath = tmpPath + ".html" #tmpPath + str(sufx) + ".html"#".jpg"
-    #print(localPath)
+def download(tmpPath,tmpUrl,sufix):
+    localPath = tmpPath + sufix
     if(os.path.exists(localPath)):
         return 
-    #print(localPath)
-    urlP = tmpUrl + ".html" # ".jpg"
+    urlP = tmpUrl + sufix
     downloadResToLocal(urlP,localPath)
 
 if __name__ == "__main__":
     startFp = 1695000
     endFp   = 1760000
-    i = 0
-    maxthr = 20
+    i       = 0
+    maxthr  = 20
+    sufix   = ".html"
+    
     for sp in ("1510/","1511/","1509/"):
         for fp in (range(startFp,endFp)):
             tmpUrl = getUrlPath(str(sp)+str(fp))
             sp = sp.replace("/","_")
             tmpPath = getLocalPath(str(sp)+str(fp))
             sp = sp.replace("_","/")
-            #print(fp)
-            thr = threading.Thread(target=download,args=(tmpPath,tmpUrl))
+            thr = threading.Thread(target=download,args=(tmpPath,tmpUrl,sufix))
             threads.append(thr)
 
             if (fp-startFp) % maxthr == 0:
@@ -75,4 +75,3 @@ if __name__ == "__main__":
                     t.join()
                 threads = []
                 print("call :"+str(maxthr*i))
-        
