@@ -9,10 +9,10 @@ import threading
 if os.name == 'posix':
     basePath ="/tmp/vnshen_so/"
 else:
-    basePath =r"d:\tmp\\"
+    basePath =r"d:\tmp"
 
 baseUrl = "http://www.nvshen.so/wp-content/uploads/2015/"
-#baseUrl = "http://www.nvshen.so/wp-content/uploads/2014/"
+baseUrl = "http://cl.exocl.net/htm_data/20/" #1511/1700971.html"
 
 threads = []
 
@@ -20,10 +20,21 @@ if(os.path.exists(basePath) == False):
     if os.name == 'posix':
         os.mkdir(r"d:\tmp")
     os.mkdir(basePath)
+        
+def getLocalPath(mon):
+    childPath = basePath + "\\" + mon
+    #if(os.path.exists(childPath) == False):
+    #    os.mkdir(childPath)
+    return childPath
 
-def downloadImage(url,localPath):
+def getUrlPath(mon):
+    childUrl = baseUrl + mon
+    return childUrl
+
+def downloadResToLocal(url1,localPath):
     try:
-        request = urllib2.Request(url)
+        #print(url1)
+        request = urllib2.Request(url1)
         request.add_header("User-Agent","fake-client")
         response = urllib2.urlopen(request)
         f = file(localPath,"wb")
@@ -31,39 +42,37 @@ def downloadImage(url,localPath):
         f.close()
     except HTTPError:
         pass
-        
-def getLocalPath(mon):
-    childPath = basePath + mon
-    if(os.path.exists(childPath) == False):
-        os.mkdir(childPath)
-    return childPath
-
-def getUrlPath(mon):
-    childUrl = baseUrl + mon
-    return childUrl
 
 def download(tmpPath,tmpUrl):
-    for img in range(1,1300):
-        localPath = tmpPath + str(img) + ".jpg"
-        if(os.path.exists(localPath)):
-           continue
-        print(localPath)
-        url = tmpUrl + str(img) + ".jpg"
-        downloadImage(url,localPath)
-
-def startDownload():
-    for pt in ("01/","02/","03/","04/","05/","06/","07/","08/"):
-    #for pt in ("12/",):
-        tmpPath = getLocalPath(pt)
-        tmpUrl = getUrlPath(pt)
-        thr = threading.Thread(target=download,args=(tmpPath,tmpUrl))
-        threads.append(thr)
-    for t in threads:
-        t.start()
-    for t in threads:
-        t.join()
-
+    localPath = tmpPath + ".html" #tmpPath + str(sufx) + ".html"#".jpg"
+    #print(localPath)
+    if(os.path.exists(localPath)):
+        return 
+    #print(localPath)
+    urlP = tmpUrl + ".html" # ".jpg"
+    downloadResToLocal(urlP,localPath)
 
 if __name__ == "__main__":
-    startDownload()
-    
+    startFp = 1695000
+    endFp   = 1760000
+    i = 0
+    maxthr = 20
+    for sp in ("1510/","1511/","1509/"):
+        for fp in (range(startFp,endFp)):
+            tmpUrl = getUrlPath(str(sp)+str(fp))
+            sp = sp.replace("/","_")
+            tmpPath = getLocalPath(str(sp)+str(fp))
+            sp = sp.replace("_","/")
+            #print(fp)
+            thr = threading.Thread(target=download,args=(tmpPath,tmpUrl))
+            threads.append(thr)
+
+            if (fp-startFp) % maxthr == 0:
+                i+=1
+                for t in threads:
+                    t.start()
+                for t in threads:
+                    t.join()
+                threads = []
+                print("call :"+str(maxthr*i))
+        
