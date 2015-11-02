@@ -15,8 +15,8 @@ if __name__ == '__main__':
 		os.system("git init %s" % local_dir_str)
 		os.chdir(local_dir_str)
 		os.system("git remote add origin %s" % git_repo_str)
-		os.system("git config core.sparsecheckout true")
-		#os.system("echo \"%s/\*\" >> .git/info/sparse-checkout" %local_dir_str)
+		os.system("git config core.sparseCheckout true")
+		os.system("echo %s/*> .git/info/sparse-checkout" %git_dir_str)
 		
 		os.system("git pull --depth=1 origin master")
 
