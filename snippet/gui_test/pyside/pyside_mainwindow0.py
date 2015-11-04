@@ -1,8 +1,8 @@
 # -*- coding:utf-8 -*-
 # Import required modules
 import sys, time
-from PySide.QtGui import QApplication,QMainWindow,QStatusBar,QLabel,QProgressBar,QTextEdit
-from PySide.QtGui import QFileDialog,QMenuBar,QKeySequence,QAction,QIcon,QMessageBox,QToolBar
+from PySide.QtGui import * #QApplication,QMainWindow,QStatusBar,QLabel,QProgressBar,QTextEdit
+#from PySide.QtGui import QFileDialog,QMenuBar,QKeySequence,QAction,QIcon,QMessageBox,QToolBar
 
 class MainWindow(QMainWindow):
 	""" Our Main Window Class
@@ -55,16 +55,27 @@ class MainWindow(QMainWindow):
 		self.fileMenu.addAction(self.saveAction)
 		self.fileMenu.addSeparator()
 		self.fileMenu.addAction(self.exitAction)
+
 		self.editMenu.addAction(self.copyAction)
-		self.fileMenu.addSeparator()
+		self.editMenu.addAction(self.cutAction)
 		self.editMenu.addAction(self.pasteAction)
+		self.editMenu.addSeparator()
+		self.editMenu.addAction(self.undoAction)
+		self.editMenu.addAction(self.redoAction)
+
 		self.helpMenu.addAction(self.aboutAction)
+		self.helpMenu.addAction(self.aboutQtAction)
 		#add toolbar
 		self.CreateToolBar()
 		self.mainToolBar.addAction(self.newAction)
+		self.mainToolBar.addAction(self.openAction)
+		self.mainToolBar.addAction(self.saveAction)
 		self.mainToolBar.addSeparator()
 		self.mainToolBar.addAction(self.copyAction)
 		self.mainToolBar.addAction(self.pasteAction)
+		self.mainToolBar.addSeparator()
+		self.mainToolBar.addAction(self.undoAction)
+		self.mainToolBar.addAction(self.redoAction)
 
 	# Slots called when the menu actions are triggered
 	def newFile(self):
@@ -83,7 +94,6 @@ class MainWindow(QMainWindow):
 			file = open(self.fileName, 'w') 
 			file.write(self.textEdit.toPlainText())
 			self.statusBar().showMessage("File saved", 2000)
-
 	def exitFile(self):
 		self.close()
 
@@ -115,13 +125,32 @@ class MainWindow(QMainWindow):
 			self, shortcut="Ctrl+C", statusTip="Copy",
 			triggered=self.textEdit.copy)
 
+		self.cutAction = QAction( QIcon('cut.png'), 'C&ut',
+			self, shortcut=QKeySequence.Cut,
+			statusTip="Cut the current selection to clipboard",
+			triggered=self.textEdit.cut)
+
 		self.pasteAction = QAction( QIcon('paste.png'), '&Paste',
 			self, shortcut="Ctrl+V",statusTip="Paste",
 			triggered=self.textEdit.paste)
 
+		self.redoAction = QAction( QIcon('redo.png'),'Redo', self,
+			shortcut=QKeySequence.Redo,
+			statusTip="Redo previous action",
+			triggered=self.textEdit.redo)
+
+		self.undoAction = QAction( QIcon('undo.png'),'Undo', self,
+			shortcut=QKeySequence.Undo,
+			statusTip="Undo previous action",
+			triggered=self.textEdit.undo)
+
 		self.aboutAction = QAction( QIcon('about.png'), 'A&bout',
 			self, statusTip="Displays info about text editor",
 			triggered=self.aboutHelp)
+
+		self.aboutQtAction = QAction( QIcon('about.png'), "About &Qt",
+			self, statusTip="Show the Qt library's About box",
+			triggered=qApp.aboutQt)
 
 	# Actual menu bar item creation
 	def CreateMenus(self):
