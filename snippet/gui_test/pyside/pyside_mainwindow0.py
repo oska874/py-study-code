@@ -1,7 +1,8 @@
 # -*- coding:utf-8 -*-
 # Import required modules
 import sys, time
-from PySide.QtGui import QApplication, QMainWindow,QStatusBar,QLabel,QProgressBar,QTextEdit,QMenuBar,QKeySequence,QAction,QIcon,QMessageBox,QToolBar
+from PySide.QtGui import QApplication,QMainWindow,QStatusBar,QLabel,QProgressBar,QTextEdit
+from PySide.QtGui import QFileDialog,QMenuBar,QKeySequence,QAction,QIcon,QMessageBox,QToolBar
 
 class MainWindow(QMainWindow):
 	""" Our Main Window Class
@@ -17,6 +18,9 @@ class MainWindow(QMainWindow):
 		self.progressBar.setMinimum(0)
 		self.progressBar.setMaximum(100)
 
+		self.fileName = None
+		self.filters = "Text files (*.txt)"
+
 	def CreateStatusBar(self):
 		""" Function to create Status Bar
 		"""
@@ -30,9 +34,9 @@ class MainWindow(QMainWindow):
 	def ShowProgress(self):
 		""" Function to show progress
 		"""
-		while(self.progressBar.value() < self.progressBar.maximum()):
-			self.progressBar.setValue(self.progressBar.value() + 10)
-			time.sleep(1)
+		#while(self.progressBar.value() < self.progressBar.maximum()):
+		#	self.progressBar.setValue(self.progressBar.value() + 10)
+		#	time.sleep(1)
 		self.statusLabel.setText('Ready')
 		self.progressBar.hide()
 
@@ -46,7 +50,9 @@ class MainWindow(QMainWindow):
 		#add menubar 
 		self.CreateMenus()
 		#add action for each menu
+		self.fileMenu.addAction(self.openAction)
 		self.fileMenu.addAction(self.newAction)
+		self.fileMenu.addAction(self.saveAction)
 		self.fileMenu.addSeparator()
 		self.fileMenu.addAction(self.exitAction)
 		self.editMenu.addAction(self.copyAction)
@@ -63,6 +69,20 @@ class MainWindow(QMainWindow):
 	# Slots called when the menu actions are triggered
 	def newFile(self):
 		self.textEdit.setText('')
+		self.fileName = None
+
+	def openFile(self):
+		self.fileName, self.filterName = QFileDialog.getOpenFileName(self)
+		self.textEdit.setText(open(self.fileName).read())
+
+	def saveFile(self):
+		if self.fileName == None or self.fileName == '':
+			self.fileName, self.filterName = QFileDialog.getSaveFileName(self, \
+			filter=self.filters)
+		if(self.fileName != ''):
+			file = open(self.fileName, 'w') 
+			file.write(self.textEdit.toPlainText())
+			self.statusBar().showMessage("File saved", 2000)
 
 	def exitFile(self):
 		self.close()
@@ -78,6 +98,14 @@ class MainWindow(QMainWindow):
 		self.newAction = QAction( QIcon('new.png'), '&New', 
 			self, shortcut=QKeySequence.New,
 			statusTip="Create a New File",triggered=self.newFile)
+
+		self.openAction = QAction( QIcon('new.png'), '&Open', 
+			self, shortcut=QKeySequence.Open,
+			statusTip="Open one exist file",triggered=self.openFile)
+
+		self.saveAction = QAction( QIcon('save.png'), '&Save',
+			self, shortcut=QKeySequence.Save,
+			statusTip="Save the current file to disk",triggered=self.saveFile)
 
 		self.exitAction = QAction( QIcon('exit.png'), 'E&xit',
 			self, shortcut="Ctrl+Q", statusTip="Exit the Application",
