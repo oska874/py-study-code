@@ -21,18 +21,23 @@ class MyWidget(QWidget):
 		self.roiSpin = QSpinBox()
 		self.roiSpin.setMinimum(1)
 		self.roiSpin.setMaximum(15)
+
 		self.yrsSpin = QSpinBox()
 		self.yrsSpin.setMinimum(1)
 		self.yrsSpin.setMaximum(20)
+
 		self.roiDial = QDial()
 		self.roiDial.setNotchesVisible(True)
 		self.roiDial.setMaximum(15)
 		self.roiDial.setMinimum(1)
 		self.roiDial.setValue(1)
+
 		self.yrsSlide = QSlider(Qt.Horizontal)
 		self.yrsSlide.setMaximum(20)
 		self.yrsSlide.setMinimum(1)
+
 		self.calculateButton = QPushButton('Calculate EMI')
+
 		self.myGridLayout = QGridLayout()
 		self.myGridLayout.addWidget(self.amtLabel, 0, 0)
 		self.myGridLayout.addWidget(self.roiLabel, 1, 0)
@@ -44,9 +49,11 @@ class MyWidget(QWidget):
 		self.myGridLayout.addWidget(self.yrsSlide, 2, 2)
 		self.myGridLayout.addWidget(self.calculateButton, 3, 1)
 		self.setLayout(self.myGridLayout)
+
 		self.setWindowTitle("A simple EMI calculator")
 		self.roiDial.valueChanged.connect(self.roiSpin.setValue)
 		self.connect(self.roiSpin, SIGNAL("valueChanged(int)"), self.roiDial.setValue)
+		
 		self.yrsSlide.valueChanged.connect(self.yrsSpin.setValue)
 		self.connect(self.yrsSpin, SIGNAL("valueChanged(int)"), self.yrsSlide, SLOT("setValue(int)"))
 		self.connect(self.calculateButton, SIGNAL("clicked()"), self.showEMI)
