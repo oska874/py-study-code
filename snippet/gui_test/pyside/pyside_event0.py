@@ -4,6 +4,18 @@
 import sys
 from PySide.QtGui import *
 from PySide.QtCore import *
+
+
+#inherited from qapplication and rewrite the notify
+class MyApplication(QApplication):
+	def __init__(self, args):
+		super(MyApplication, self).__init__(args)
+		
+	def notify(self, receiver, event):
+		if (event.type() == QEvent.KeyPress):
+			QMessageBox.information(None, "Received Key Release EVent", "You Pressed: "+ event.text())
+		return super(MyApplication, self).notify(receiver, event)
+
 # Our main widget class
 class MyWidget(QWidget):
 # Constructor function
@@ -55,16 +67,23 @@ class MyWidget(QWidget):
 		return QWidget.event(self,event)
 
 	def eventFilter(self, receiver, event):
-		#if(event.type() == QEvent.MouseButtonPress):
-		#	QMessageBox.information(None,"Filtered Mouse Press Event!!",'Mouse Press Detected')
-			#return True
+		if(event.type() == QEvent.MouseButtonPress):
+			QMessageBox.information(None,"Filtered Mouse Press Event!!",'Mouse Press Detected')
+			return True
 		return super(MyWidget,self).eventFilter(receiver, event)
+
+	def notify(self, receiver, event):
+		#if (event.type() == QEvent.KeyPress):
+		#	QMessageBox.information(None, "Received Key Release EVent", "You Pressed: "+ event.text())
+		if(event.type() == QEvent.MouseButtonPress):
+			QMessageBox.information(None,"Filtered Mouse Press Event!!",'Mouse Press Detected1111')
+		return super(MyApplication, self).notify(receiver, event)
 
 
 if __name__ =='__main__':
 	# Exception Handling
 	try:
-		myApp = QApplication(sys.argv)
+		myApp = MyApplication(sys.argv)
 		myWidget = MyWidget()
 		myWidget.show()
 		myApp.exec_()
