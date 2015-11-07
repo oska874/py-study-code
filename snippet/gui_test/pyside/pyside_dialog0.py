@@ -139,9 +139,6 @@ class FindDialog(QDialog):
 		#search functionality goes here...
 			print("Forward Find")
 
-
-
-
 if __name__ =='__main__':
 	# Exception Handling
 	try:
