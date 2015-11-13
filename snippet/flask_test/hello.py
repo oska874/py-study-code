@@ -1,4 +1,5 @@
-from flask import Flask
+#-*- coding:utf8 -*-
+from flask import Flask,request
 app = Flask(__name__)
 
 from flask import render_template
@@ -11,6 +12,19 @@ def hello(name=None):
 @app.route('/')
 def index():
     return 'Index Page'
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+	print("lgoin")
+	#print(request.method)
+	error = None
+	if request.method == 'POST':
+		if valid_login(request.form['username'],request.form['password']):
+		    return log_the_user_in(request.form['username'])
+        else:
+            error = 'Invalid username/password'
+    # 如果请求访求是 GET 或验证未通过就会执行下面的代码
+	return render_template('login.html', error=error)
 
 #@app.route('/hello')
 #def hello():
