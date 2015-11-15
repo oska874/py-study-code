@@ -11,15 +11,11 @@ import socket
 messages = ["This is the message" ,
             "It will be sent" ,
             "in parts "]
- 
 print "Connect to the server"
- 
 server_address = ("192.168.1.102",10001)
  
 #Create a TCP/IP sock
- 
 socks = []
- 
 for i in range(10):
     socks.append(socket.socket(socket.AF_INET,socket.SOCK_STREAM))
  

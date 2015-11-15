@@ -1,3 +1,4 @@
+#-*- codiing:utf-8 -*-
 '''
 Created on 2012-1-6
 The echo server example from the socket section can be extanded to watche for more than
@@ -5,6 +6,11 @@ one connection at a time by using select() .The new version starts out by creati
 TCP/IP socket and configuring it to listen on an address
 @author: xiaojay
 '''
+
+'''
+select can do many sockets in one time, include recvive/send/exception
+'''
+
 import select
 import socket
 import Queue
@@ -17,7 +23,6 @@ server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR  , 1)
  
 server_address= ('192.168.1.102',10001)
 server.bind(server_address)
- 
 server.listen(10)
  
 #sockets from which we except to read
@@ -30,17 +35,24 @@ outputs = []
 message_queues = {}
  
 #A optional parameter for select is TIMEOUT
-timeout = 20
+timeout = 2000
  
 while inputs:
     print "waiting for next event"
     readable , writable , exceptional = select.select(inputs, outputs, inputs, timeout)
- 
+    print(len(readable),len(writable),len(exceptional))
     # When timeout reached , select return three empty lists
     if not (readable or writable or exceptional) :
         print "Time out ! "
-        break;    
-    for s in readable :
+        break;
+
+    i = 0;
+    for s in readable:
+        print(i)
+        i=i+1
+        '''
+        add new socket to array input
+        '''
         if s is server:
             # A "readable" socket is ready to accept a connection
             connection, client_address = s.accept()
@@ -50,7 +62,7 @@ while inputs:
             message_queues[connection] = Queue.Queue()
         else:
             data = s.recv(1024)
-            if data :
+            if data:
                 print " received " , data , "from ",s.getpeername()
                 message_queues[s].put(data)
                 # Add output channel for response    
@@ -65,7 +77,11 @@ while inputs:
                 s.close()
                 #remove message queue 
                 del message_queues[s]
+
     for s in writable:
+        '''
+        add new socket to array outputs
+        '''
         try:
             next_msg = message_queues[s].get_nowait()
         except Queue.Empty:
