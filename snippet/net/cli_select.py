@@ -11,7 +11,7 @@ import socket
 messages = ["This is the message" ,
             "It will be sent" ,
             "in parts "]
-print "Connect to the server"
+print("Connect to the server")
 server_address = ("192.168.1.102",10001)
  
 #Create a TCP/IP sock
@@ -27,12 +27,12 @@ for message in messages :
     #Sending message from different sockets
     for s in socks:
         counter+=1
-        print "  %s sending %s" % (s.getpeername(),message+" version "+str(counter))
+        print("  %s sending %s version %s ",  s.getpeername(),message,str(counter))
         s.send(message+" version "+str(counter))
     #Read responses on both sockets
     for s in socks:
         data = s.recv(1024)
-        print " %s received %s" % (s.getpeername(),data)
+        print (" %s received %s" , (s.getpeername(),data))
         if not data:
-            print "closing socket ",s.getpeername()
+            print("closing socket ",s.getpeername())
             s.close()

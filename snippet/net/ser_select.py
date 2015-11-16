@@ -38,12 +38,12 @@ message_queues = {}
 timeout = 2000
  
 while inputs:
-    print "waiting for next event"
+    print("waiting for next event")
     readable , writable , exceptional = select.select(inputs, outputs, inputs, timeout)
     print(len(readable),len(writable),len(exceptional))
     # When timeout reached , select return three empty lists
     if not (readable or writable or exceptional) :
-        print "Time out ! "
+        print("Time out ! ")
         break;
 
     i = 0;
@@ -56,21 +56,21 @@ while inputs:
         if s is server:
             # A "readable" socket is ready to accept a connection
             connection, client_address = s.accept()
-            print "    connection from ", client_address
+            print("    connection from %s",client_address)
             connection.setblocking(0)
             inputs.append(connection)
             message_queues[connection] = Queue.Queue()
         else:
             data = s.recv(1024)
             if data:
-                print " received " , data , "from ",s.getpeername()
+                print(" received %s from %s", data ,s.getpeername())
                 message_queues[s].put(data)
                 # Add output channel for response    
                 if s not in outputs:
                     outputs.append(s)
             else:
                 #Interpret empty result as closed connection
-                print "  closing", client_address
+                print("  closing %s", client_address)
                 if s in outputs :
                     outputs.remove(s)
                 inputs.remove(s)
@@ -85,14 +85,15 @@ while inputs:
         try:
             next_msg = message_queues[s].get_nowait()
         except Queue.Empty:
-            print " " , s.getpeername() , 'queue empty'
+            print("%s 'queue empty",s.getpeername())
             outputs.remove(s)
         else:
             print " sending " , next_msg , " to ", s.getpeername()
+            print(" sending %s to %s ", next_msg,s.getpeername())
             s.send(next_msg)
      
     for s in exceptional:
-        print " exception condition on ", s.getpeername()
+        print(" exception condition on %s", s.getpeername())
         #stop listening for input on the connection
         inputs.remove(s)
         if s in outputs:
