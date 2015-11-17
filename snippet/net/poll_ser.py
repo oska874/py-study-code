@@ -1,69 +1,93 @@
-#-*- codiing:utf-8 -*-
-'''
-Created on 2012-1-6
-The echo server example from the socket section can be extanded to watche for more than
-one connection at a time by using select() .The new version starts out by creating a nonblocking
-TCP/IP socket and configuring it to listen on an address
-@author: xiaojay
-'''
-
-'''
-select can do many sockets in one time, include recvive/send/exception
-'''
-
-import select
+#-*- coding:utf8 -*-
 import socket
+import select
 import Queue
- 
-#create a socket
-server = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+
+server_address=('0.0.0.0',10001)
+server=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 server.setblocking(False)
-#set option reused
-server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR  , 1)
- 
-server_address= ('192.168.1.102',10001)
+server.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1)
 server.bind(server_address)
-server.listen(10)
- 
-#sockets from which we except to read
-inputs = [server]
- 
-#sockets from which we expect to write
-outputs = []
- 
-#Outgoing message queues (socket:Queue)
-message_queues = {}
- 
-#A optional parameter for select is TIMEOUT
-timeout = 2000000
- 
+server.listen(5)
 
-poObj = select.poll()
-poObj.register(server, select.POLLIN | select.POLLPRI | select.POLLHUP | select.POLLERR)#select.POLLIN|select.POLLOUT|select.POLLERR)
+message_queues={}
+#poll时间单位是毫秒
+timeout = 1000
 
-fds = ""
-eves = ""
-while inputs:
-    print("waiting for next event")
-#    readable , writable , exceptional = select.select(inputs, outputs, inputs, timeout)
-    xx = poObj.poll(timeout)
-    if len(xx) == 2:
-        fds=xx(0)
-        eves=xx(1)
-        print(fds,eves)
-    else:
-        print("no")
-    
-    if fds != None:
-        if eves &(select.POLLPRI| select.POLLIN):
-            print("in")
-        elif eves == select.POLLOUT:
-            print("out")
-        elif eves == select.POLLERR:
-            print("err")
+# Create a limit for the event
+READ_ONLY = ( select.POLLIN | select.POLLPRI | select.POLLHUP | select.POLLERR)
+READ_WRITE = (READ_ONLY|select.POLLOUT)
 
-    # When timeout reached , select return three empty lists
-    if not (fds or eves ) :
-        print("Time out ! ")
-        break;
+# Set up the poller
+poller = select.poll()
+poller.register(server,READ_ONLY)
+#Map file descriptors to socket objects
+#server.fileno()是获得server这个socket的文件描述符，是int类型
+fd_to_socket = {server.fileno():server,}
 
+i=0
+while True:
+    i=i+1
+    events = poller.poll(timeout)
+    print(events,i)
+    #fd是描述符，flag是event状态，都是int类型
+    for fd ,flag in  events:
+        # Retrieve the actual socket from its file descriptor
+        #s为当前的socket对象
+        s = fd_to_socket[fd]
+        
+        if flag & (select.POLLIN | select.POLLPRI) :
+            print(i)
+            if s is server :
+                print(i)
+                # A readable socket is ready to accept a connection
+                connection , client_address = s.accept()
+                print " Connection " , client_address
+                connection.setblocking(False)
+                 
+                fd_to_socket[connection.fileno()] = connection
+                poller.register(connection,READ_ONLY)
+                 
+                #Give the connection a queue to send data
+                message_queues[connection]  = Queue.Queue()
+            else :
+                data = s.recv(1024)
+                if data:
+                    print(i)
+                    # A readable client socket has data
+                    print "  received %s from %s " % (data, s.getpeername())
+                    message_queues[s].put(data)
+                    poller.modify(s,READ_WRITE)
+                else :
+                    print(i)
+                    # Close the connection
+                    print "  closing" , s.getpeername()
+                    # Stop listening for input on the connection
+                    poller.unregister(s)
+                    s.close()
+                    del message_queues[s]
+        elif flag & select.POLLHUP :
+            print(i)
+            #A client that "hang up" , to be closed.
+            print " Closing ", s.getpeername() ,"(HUP)"
+            poller.unregister(s)
+            s.close()
+        elif flag & select.POLLOUT :
+            print(i)
+            #Socket is ready to send data , if there is any to send
+            try:
+                next_msg = message_queues[s].get_nowait()
+            except Queue.Empty:
+                # No messages waiting so stop checking
+                print s.getpeername() , " queue empty"
+                poller.modify(s,READ_ONLY)
+            else :
+                print " sending %s to %s" % (next_msg , s.getpeername())
+                s.send(next_msg)
+        elif flag & select.POLLERR:
+            print(i)
+            #Any events with POLLERR cause the server to close the socket
+            print "  exception on" , s.getpeername()
+            poller.unregister(s)
+            s.close()
+            del message_queues[s]
