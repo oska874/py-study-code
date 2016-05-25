@@ -7,3 +7,7 @@ how:
 1. use github python apis get user infomation , like your repos , stars , sources , etc.
 2. clone or download to storage
 3. cyclic check specific repos and backup it
+
+pre-requst:
+
+1. PyGithub
