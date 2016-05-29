@@ -1,3 +1,9 @@
+#-*- codiing:utf-8 -*-
+
+'''
+fork server : accept one connection ,then fork a process to process to the new connectionxiu
+'''
+
 import fcntl , traceback , os , sys , time ,socket
 
 def getlastaccess(fd, ip):
@@ -74,7 +80,12 @@ if __name__ == "__main__":
 
         reap()
 
-        pid = os.fork()
+        try:
+            pid = os.fork()
+        except:
+            print("fork failed\n")
+            clientsock.close()
+            continue
 
         if pid:
             clientsock.close()
