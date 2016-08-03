@@ -29,4 +29,4 @@ while 1:
     data = s.recv(1024)
     print ('Received: ', repr(data))
 s.close()
-
+print ('Received: ', repr(data))

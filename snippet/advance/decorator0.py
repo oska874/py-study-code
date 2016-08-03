@@ -7,13 +7,15 @@ def hello(fn):
         fn()
         print "goodby, %s" % fn.__name__
 	print "11hello, %s" % fn.__name__
-#   return wrapper
+    return wrapper
  
 @hello
 def foo():
-    print "i am foo"
+    print "a i am foo"
  
-#foo()
+print("test 0")
+foo()
+print("test 0.1")
 
 #@decorator
 #def func():
@@ -23,10 +25,14 @@ def foo():
 
 def fuck(fn):
     print "fuck %s!" % fn.__name__[::-1].upper()
+    fn()
  
 @fuck
 def wfg():
 	print("will not run this")
+
+print("test 1")
+wfg
 
 def makeHtmlTag(tag, *args, **kwds):
     def real_decorator(fn):
@@ -41,6 +47,7 @@ def makeHtmlTag(tag, *args, **kwds):
 def hello():
     return "hello world"
  
+print("test 2")
 print hello()
 
 #class decorator
