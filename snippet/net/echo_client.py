@@ -3,7 +3,7 @@ import socket
 import sys
 
 HOST = '127.0.0.1'    # The remote host
-PORT = 50007              # The same port as used by the server
+PORT = 51234 # The same port as used by the server
 s = None
 for res in socket.getaddrinfo(HOST, PORT, socket.AF_UNSPEC, socket.SOCK_STREAM):
     af, socktype, proto, canonname, sa = res
@@ -25,6 +25,8 @@ if s is None:
     print ('could not open socket')
     sys.exit(1)
 s.sendall('Hello, world')
-data = s.recv(1024)
+while 1:
+    data = s.recv(1024)
+    print ('Received: ', repr(data))
 s.close()
 print ('Received: ', repr(data))
