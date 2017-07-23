@@ -67,11 +67,9 @@ while 1:
         c.execute("update macs set used=1 where sno=?",tu2)
         c.execute("select * from macs")
     del tu2
-while 1:
-    res = c.fetchone()
-    if not res:
-        break
-    print(res)
+print("DONE1.5")
+for row in c.execute("select * from macs"):
+    print(row)
 print("DONE2")
 conn.close()
 

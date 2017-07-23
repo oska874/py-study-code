@@ -12,7 +12,7 @@ from xmodem import XMODEM
 """
 
 breaked = 0
-FILE1 = "C:\\app\\SpaceSniffer.exe"
+FILE1 = "D:\\code\\py-study-code\\snippet\\sqlite\mac.txt"
 fr = ""
 
 def getc(size, timeout=1):
@@ -21,7 +21,7 @@ def getc(size, timeout=1):
 def putc(data, timeout=1):
     return main_ser.write(data)
 
-with serial.Serial("com5",115200,timeout=5) as main_ser:
+with serial.Serial("com6",115200,timeout=5) as main_ser:
     print("stag 1")
     print(main_ser)
     print(main_ser.is_open)
@@ -61,8 +61,13 @@ with serial.Serial("com5",115200,timeout=5) as main_ser:
             break
     print(line)
     if b'=> ' in line:
+        print("a1")
+        #main_ser.write(b"md 0x1000000;\n\n")
+        #main_ser.readline()
         #burn to flash
-        main_ser.write(b"protect off all;erase 0xef040000 +0xc0000;cp.b 0x01000000 0xef040000 0xc0000;\n\n")
+        #main_ser.write(b"protect off all;erase 0xef040000 +0xc0000;cp.b 0x01000000 0xef040000 0xc0000;\n\n")
+        #program mac addr
+        #main_ser.write(b"pro off all;erase 0xec020000 +0x20000;")
     else:
         print("error2")
 
