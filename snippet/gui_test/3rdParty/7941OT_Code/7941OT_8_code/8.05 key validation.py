@@ -1,10 +1,10 @@
 """
 Code illustration: 8.05
 validate='key' demo
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
-import Tkinter as tk
+import tkinter as tk
 
 class keyValidationDemo():
     def __init__(self):
@@ -18,7 +18,7 @@ class keyValidationDemo():
         root.mainloop()
 
     def validate_data(self, S):
-        print "S='%s'" % S
+        print("S='%s'" % S)
         self.errmsg.config(text='')
         return (S.isalpha() or S ==' ')
         

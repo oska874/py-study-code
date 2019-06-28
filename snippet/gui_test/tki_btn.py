@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #button
 
-import Tkinter as tk
+import tkinter as tk
 import tkMessageBox
 
 def helloCallback():

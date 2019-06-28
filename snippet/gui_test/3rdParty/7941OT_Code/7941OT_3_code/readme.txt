@@ -1,6 +1,6 @@
 ====================================================================
 Code Readme
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 Chapter 3: Drum Machine
 ====================================================================
 List of code samples:
@@ -11,7 +11,7 @@ List of code samples:
 3.04:   Loading Drum Samples
 3.05:   Playing Sound Files with pymedia module
 3.06:   Demo of widget.config()
-3.07:   Tkinter and Threading
+3.07:   tkinter and Threading
 3.08:   Adding support for multiple beat patterns
 3.09:   Object Persistence: pickling and unpickling
 3.10:   tkinter versus ttk Themed Widgets / new widgets introduced in ttk

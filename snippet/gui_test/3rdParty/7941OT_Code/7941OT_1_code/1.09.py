@@ -2,9 +2,9 @@
 Code illustration: 1.09
 A demonstration of common pack() options
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """ 
-from Tkinter import *
+from tkinter import *
 root = Tk()
 # Absolute positioning
 Button(root, text="Absolute Placement").place(x=20, y=10)

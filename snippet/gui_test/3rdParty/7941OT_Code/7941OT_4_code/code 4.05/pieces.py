@@ -5,7 +5,7 @@ Code illustration: 4.05
 
 
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
 import sys
@@ -62,8 +62,8 @@ class Piece(object):
                     allowed_moves.append(dest)
                     collision = True
 
-        allowed_moves = filter(board.is_on_board, allowed_moves)
-        return map(board.alpha_notation, allowed_moves)
+        allowed_moves = list(filter(board.is_on_board, allowed_moves))
+        return list(map(board.alpha_notation, allowed_moves))
 
 
 class King(Piece):
@@ -100,8 +100,8 @@ class Knight(Piece):
             dest = beginningpos[0]+x, beginningpos[1]+y
             if(board.alpha_notation(dest) not in board.occupied(piece.color)):
                 allowed_moves.append(dest)
-        allowed_moves = filter(board.is_on_board, allowed_moves)
-        return map(board.alpha_notation, allowed_moves)
+        allowed_moves = list(filter(board.is_on_board, allowed_moves))
+        return list(map(board.alpha_notation, allowed_moves))
 
 
 class Pawn(Piece):
@@ -128,6 +128,6 @@ class Pawn(Piece):
             attack = beginningpos[0] + direction, beginningpos[1] + a
             if board.letter_notation(attack) in board.occupied(enemy):
                 allowed_moves.append(attack)
-        allowed_moves = filter(board.is_on_board, allowed_moves)
-        return map(board.alpha_notation, allowed_moves)
+        allowed_moves = list(filter(board.is_on_board, allowed_moves))
+        return list(map(board.alpha_notation, allowed_moves))
 

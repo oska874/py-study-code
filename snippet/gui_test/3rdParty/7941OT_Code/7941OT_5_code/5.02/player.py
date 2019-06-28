@@ -3,7 +3,7 @@ Code illustration: 5.02
 
 No changes here in this iteration
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """ 
 
 
@@ -48,4 +48,4 @@ class Player():
     
         
 if __name__ == '__main__':
-    print 'pyglet player class implementation'
+    print('pyglet player class implementation')

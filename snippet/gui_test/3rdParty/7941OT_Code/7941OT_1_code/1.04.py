@@ -2,9 +2,9 @@
 Code illustration: 1.04
 A demonstration of some of pack() options
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """
-from Tkinter import *
+from tkinter import *
 root = Tk()
 Button(root, text="A").pack(side=LEFT, expand=YES, fill=Y)
 Button(root, text="B").pack(side=TOP, expand=YES, fill=BOTH)

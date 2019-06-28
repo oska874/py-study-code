@@ -1,5 +1,5 @@
 """Example showing use of a callback shim"""
-import Tkinter
+import tkinter
 
 def doButton(buttonName):
 	"""My desired callback. I'll need a callback shim
@@ -18,12 +18,12 @@ class SimpleCallback:
 	def __call__(self, *args):
 		return self.__callback (*(self.__firstArgs + args))
 
-root = Tkinter.Tk()
+root = tkinter.Tk()
 
 buttonNames = ("Button 1", "Button 2", "Button 3")
 for name in buttonNames:
 	callback = SimpleCallback(doButton, name)
 	
-Tkinter.Button(root, text=name, command=callback).pack()
+tkinter.Button(root, text=name, command=callback).pack()
 
 root.mainloop()

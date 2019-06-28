@@ -24,7 +24,7 @@ is_in_check_after_move() # to check if a king is in check after a move
 complete_move # to finalize move and to modify records as a result of the move
 
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """ 
 from copy import deepcopy
 import re
@@ -110,7 +110,7 @@ class Board(dict):
     def all_moves_available(self, color):
         
         result = []
-        for coord in self.keys():
+        for coord in list(self.keys()):
             if (self[coord] is not None) and self[coord].color == color:
                 moves = self[coord].moves_available(coord)
                 if moves: result += moves
@@ -120,20 +120,20 @@ class Board(dict):
         result = []
         
 
-        for coord in self.iterkeys():
+        for coord in self.keys():
             if self[coord].color == color:
                 result.append(coord)
         return result
 
     def position_of_king(self, color):
-        for pos in self.keys():
+        for pos in list(self.keys()):
             if isinstance(self[pos], pieces.King) and self[pos].color == color:
                 return pos
 
     def king_in_check(self, color):
         kingpos =  self.position_of_king(color)
         opponent = ('black' if color =='white' else 'white')
-        for pieces in self.iteritems():
+        for pieces in self.items():
             if kingpos in self.all_moves_available(opponent):
                 return True
             else:

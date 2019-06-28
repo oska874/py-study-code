@@ -4,9 +4,9 @@ Text Editor Code
 Step 1: Adding top-level
 Step 2: Add menubuttons
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """ 
-from Tkinter import *
+from tkinter import *
 #
 #Step 1: Create a top-level window
 #

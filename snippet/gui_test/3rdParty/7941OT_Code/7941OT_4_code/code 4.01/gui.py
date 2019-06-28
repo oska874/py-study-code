@@ -3,10 +3,10 @@ Code illustration: 4.01
 1) Creating the View File
 2) Drawing Chess Board With the Canvas Widget
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
-from Tkinter import *
+from tkinter import *
 
 class GUI():
     rows = 8

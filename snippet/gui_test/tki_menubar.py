@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-from Tkinter import *
+from tkinter import *
 def donothing():
    filewin = Toplevel(root)
    button = Button(filewin, text="Do nothing button")

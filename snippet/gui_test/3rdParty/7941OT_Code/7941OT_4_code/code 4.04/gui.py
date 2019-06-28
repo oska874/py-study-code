@@ -4,10 +4,10 @@ Displaying the Pieces
 
 --> No changes from the previous iteration
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
-from Tkinter import *
+from tkinter import *
 import chessboard
 from PIL import ImageTk
 
@@ -42,7 +42,7 @@ class GUI(dict):
 
     def draw_pieces(self): 
         self.canvas.delete("occupied")
-        for xycoord, piece in self.chessboard.iteritems(): 
+        for xycoord, piece in self.chessboard.items(): 
             x,y = self.chessboard.num_notation(xycoord)
             if piece is not None:
                 filename = "../pieces_image/%s%s.png" % (piece.shortname.lower(),piece.color)

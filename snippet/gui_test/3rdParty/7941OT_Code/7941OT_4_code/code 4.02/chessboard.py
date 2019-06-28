@@ -8,7 +8,7 @@ ChessError(Exception)
 InvalidColor(ChessError)
 
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 import pieces
 import re

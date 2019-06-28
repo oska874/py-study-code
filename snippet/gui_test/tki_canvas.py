@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #canvas
 
-import Tkinter as tk
+import tkinter as tk
 
 root=tk.Tk()				#top windows
 canvas1 = tk.Canvas()		#canvas instance

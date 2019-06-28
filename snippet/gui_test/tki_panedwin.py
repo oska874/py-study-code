@@ -1,4 +1,4 @@
-from Tkinter import *
+from tkinter import *
 
 m1 = PanedWindow()
 m1.pack(fill=BOTH, expand=1)

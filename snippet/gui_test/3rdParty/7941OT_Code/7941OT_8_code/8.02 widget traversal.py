@@ -2,9 +2,9 @@
 Code illustration: 8.02
 
 Widget Traversal
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
-from Tkinter import *
+from tkinter import *
 
 class TraversalDemo:
     def __init__(self, root):

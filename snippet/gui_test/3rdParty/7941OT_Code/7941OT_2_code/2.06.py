@@ -2,32 +2,32 @@
 Code illustration: 2.06
 A demonstration of tkFileDialog
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """ 
 
 
-from Tkinter import *
-import tkFileDialog
+from tkinter import *
+import tkinter.filedialog
 
 
 root = Tk()
 
 def askopenfile():
-    tkFileDialog.askopenfile(mode='r')
+    tkinter.filedialog.askopenfile(mode='r')
     
 
 def askopenfilename():
-    tkFileDialog.askopenfilename()
+    tkinter.filedialog.askopenfilename()
 
 def asksaveasFile():
-    tkFileDialog.asksaveasfile()
+    tkinter.filedialog.asksaveasfile()
 
 
 def asksaveasfilename():
-    tkFileDialog.asksaveasfilename()
+    tkinter.filedialog.asksaveasfilename()
 
 def askDirectory():
-    tkFileDialog.askdirectory()
+    tkinter.filedialog.askdirectory()
 
 fr1 = Frame(root)
 fr2 = Frame(root)

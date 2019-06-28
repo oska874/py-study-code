@@ -2,9 +2,9 @@
 Code illustration: 1.06
 Simple example of grid Geometry Manager
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """
-from Tkinter import *
+from tkinter import *
 root = Tk()
 Label(root, text="Username").grid(row=0, sticky=W)
 Label(root, text="Password").grid(row=1, sticky=W)

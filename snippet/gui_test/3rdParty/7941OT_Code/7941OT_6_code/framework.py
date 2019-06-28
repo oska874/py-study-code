@@ -1,9 +1,9 @@
-import Tkinter as tk
+import tkinter as tk
 
 class GUIFramework(object):
     """
     GUIFramework is a class that provides a higher level of abstraction for
-    the development of Tkinter graphic user interfaces (GUIs).
+    the development of tkinter graphic user interfaces (GUIs).
     Every class that inherits from GUIFramework can define its own menuitems
     attribute, which is a tuple of a form where each item is a string of the
     format 'MenuName - MenuButtonName/Accelrator/Commandcallback/Underlinenumber'.
@@ -30,7 +30,7 @@ class GUIFramework(object):
         for v in self.menuitems:
             menu = tk.Menu(self.menubar, tearoff=0)
             label, items = v.split('-')
-            items = map(str.strip, items.split(','))
+            items = list(map(str.strip, items.split(',')))
             for item in items:
                 self.__add_menu_command(menu, item)
             self.menubar.add_cascade(label=label, menu=menu)
@@ -57,13 +57,13 @@ class TestThisFramework(GUIFramework):
         'About- About//self.about'
     )    
     def new_file(self):
-        print 'newfile tested OK'
+        print('newfile tested OK')
     def openFile(self):
-        print 'openfile tested OK'
+        print('openfile tested OK')
     def undo(self):
-        print 'undo tested OK'
+        print('undo tested OK')
     def about(self):
-        print 'about tested OK'
+        print('about tested OK')
 
 if __name__ == '__main__':
     root= tk.Tk()

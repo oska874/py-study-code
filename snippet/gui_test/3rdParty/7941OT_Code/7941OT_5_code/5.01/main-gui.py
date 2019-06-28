@@ -3,13 +3,13 @@ Code illustration: 5.01
 
 Creating GUI to Load and play a song
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
 
 
-from Tkinter  import *
-import tkFileDialog
+from tkinter  import *
+import tkinter.filedialog
 
 import player
 
@@ -59,7 +59,7 @@ class GUI:
   
     
     def add_file(self):
-        tfile = tkFileDialog.askopenfilename(filetypes=[('All supported', '.mp3 .wav .ogg'), ('All files', '*.*')])
+        tfile = tkinter.filedialog.askopenfilename(filetypes=[('All supported', '.mp3 .wav .ogg'), ('All files', '*.*')])
         self.currentTrack = tfile
 
  

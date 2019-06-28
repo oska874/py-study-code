@@ -2,11 +2,11 @@
 Code illustration: 9.01
 Demo of Available Cursors
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
 
-from Tkinter import *
+from tkinter import *
 
 all_cursors = ['X_cursor' , 'arrow' , 'based_arrow_down' , 'based_arrow_up' , 
                'boat' , 'bogosity' , 'bottom_left_corner' , 'bottom_right_corner' , 

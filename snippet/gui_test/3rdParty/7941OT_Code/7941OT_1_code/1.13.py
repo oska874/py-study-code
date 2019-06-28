@@ -4,10 +4,10 @@ A demonstration of:
 1)some important top-level methods
 2)tkinter styling
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """ 
 
-from Tkinter import *
+from tkinter import *
 root = Tk()
 
 #demo of some important top-level methods

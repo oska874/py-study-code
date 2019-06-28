@@ -1,8 +1,8 @@
 import threading
-import Queue
+import queue
 import random
 import time
-from Tkinter import *
+from tkinter import *
 
 class GUI(Tk):
     def __init__(self, queue):
@@ -20,17 +20,17 @@ class GUI(Tk):
         try:
             while True:
                 task = self.queue.get(block=False)
-                if task.has_key('game_over'):
+                if 'game_over' in task:
                     self.game_over()
-                elif task.has_key('move'):
+                elif 'move' in task:
                     points = [x for point in task['move'] for x in point]
                     self.canvas.coords(self.snake, *points)
-                elif task.has_key('food'):
+                elif 'food' in task:
                     self.canvas.coords(self.food, *task['food'])
-                elif task.has_key('points_earned'):
+                elif 'points_earned' in task:
                     self.canvas.itemconfigure(self.points_earned , text='Score: {}'.format(task['points_earned']))
                 self.queue.task_done()
-        except Queue.Empty:
+        except queue.Empty:
             if not self.is_game_over:
                 self.canvas.after(100, self.queue_handler)
 
@@ -104,7 +104,7 @@ class Snake(threading.Thread):
 
 
 def main():
-    queue = Queue.Queue()
+    queue = queue.Queue()
     gui = GUI(queue)
     snake = Snake(gui, queue)
     gui.bind('<Key-Left>', snake.key_pressed)

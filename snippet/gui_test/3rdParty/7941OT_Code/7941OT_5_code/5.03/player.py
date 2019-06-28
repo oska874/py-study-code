@@ -16,7 +16,7 @@ METHODS MODIFIED:
 
 
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """ 
 
 
@@ -68,7 +68,7 @@ class Player():
             self.parent.currentTrack = self.parent.alltracks[next_trackindx]
             self.parent.launch_play()
         except:
-            print 'end of list'
+            print('end of list')
 
                 
     def start_play_thread(self):
@@ -122,4 +122,4 @@ class Player():
     
         
 if __name__ == '__main__':
-    print 'a pyglet player class implementation'
+    print('a pyglet player class implementation')

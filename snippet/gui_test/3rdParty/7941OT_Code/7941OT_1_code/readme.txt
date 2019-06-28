@@ -1,6 +1,6 @@
 ====================================================================
 Code Readme
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 Chapter 1: List of Programs
 ====================================================================
 

@@ -8,10 +8,10 @@ File>Save
 File>Save As
 functionality
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """ 
-from Tkinter import *
-import tkFileDialog
+from tkinter import *
+import tkinter.filedialog
 import os
 root = Tk()
 root.geometry('350x350')
@@ -23,7 +23,7 @@ def new_file():
     textPad.delete(1.0,END)	
 def open_file():
     global filename
-    filename = tkFileDialog.askopenfilename(defaultextension=".txt",filetypes=[("All Files","*.*"),("Text Documents","*.txt")])
+    filename = tkinter.filedialog.askopenfilename(defaultextension=".txt",filetypes=[("All Files","*.*"),("Text Documents","*.txt")])
     if filename == "": # If no file chosen.
         filename = None # Absence of file.
     else:
@@ -50,7 +50,7 @@ def save():
 def save_as():
     try:
         # Getting a filename to save the file.
-        f = tkFileDialog.asksaveasfilename(initialfile='Untitled.txt',defaultextension=".txt",filetypes=[("All Files","*.*"),("Text Documents","*.txt")])
+        f = tkinter.filedialog.asksaveasfilename(initialfile='Untitled.txt',defaultextension=".txt",filetypes=[("All Files","*.*"),("Text Documents","*.txt")])
         fh = open(f, 'w')           
         textoutput = textPad.get(0.0, END)
         fh.write(textoutput)              

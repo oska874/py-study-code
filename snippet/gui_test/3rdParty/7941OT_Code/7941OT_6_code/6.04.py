@@ -28,19 +28,19 @@ dash_options_combobox  /set_dash
 
 
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
 
 
-from Tkinter  import *
-import tkFileDialog
-import tkMessageBox
+from tkinter  import *
+import tkinter.filedialog
+import tkinter.messagebox
 import Image
 import ImageTk
-from tkColorChooser import askcolor
+from tkinter.colorchooser import askcolor
 
-import ttk
+import tkinter.ttk
 
 import framework
 
@@ -150,7 +150,7 @@ class GUI(framework.GUIFramework):
         
     def width_options_combobox(self):
             Label(self.topbar,text='Width:').pack(side=LEFT)
-            self.widthcmbobx = ttk.Combobox(self.topbar, state='readonly', width=3)
+            self.widthcmbobx = tkinter.ttk.Combobox(self.topbar, state='readonly', width=3)
             self.widthcmbobx.pack(side=LEFT)
             self.widthcmbobx['values'] = (1.0, 2.0, 3.0,4.0,5.0,6.0,7.0,8.0,9.0, 10.0)
             self.widthcmbobx.bind('<<ComboboxSelected>>', self.set_width)
@@ -158,7 +158,7 @@ class GUI(framework.GUIFramework):
 
     def fill_options_combobox(self):
             Label(self.topbar,text='Fill:').pack(side=LEFT)
-            self.fillcmbobx = ttk.Combobox(self.topbar, state='readonly', width=5)
+            self.fillcmbobx = tkinter.ttk.Combobox(self.topbar, state='readonly', width=5)
             self.fillcmbobx.pack(side=LEFT)
             self.fillcmbobx['values'] = ('none', 'fg','bg', 'black', 'white' )
             self.fillcmbobx.bind('<<ComboboxSelected>>', self.set_fill)
@@ -175,7 +175,7 @@ class GUI(framework.GUIFramework):
 
     def outline_options_combobox(self):
             Label(self.topbar,text='Outline:').pack(side=LEFT)
-            self.outlncmbobx = ttk.Combobox(self.topbar, state='readonly', width=5)
+            self.outlncmbobx = tkinter.ttk.Combobox(self.topbar, state='readonly', width=5)
             self.outlncmbobx.pack(side=LEFT)
             self.outlncmbobx['values'] = ('none', 'fg','bg', 'black', 'white' )
             self.outlncmbobx.bind('<<ComboboxSelected>>', self.set_outline)
@@ -193,7 +193,7 @@ class GUI(framework.GUIFramework):
 
     def dash_options_combobox(self):
             Label(self.topbar,text='Dash:').pack(side=LEFT)
-            self.dashcmbobx = ttk.Combobox(self.topbar, state='readonly', width=5)
+            self.dashcmbobx = tkinter.ttk.Combobox(self.topbar, state='readonly', width=5)
             self.dashcmbobx.pack(side=LEFT)
             self.dashcmbobx['values'] = ('none','small', 'medium', 'large' )
             self.dashcmbobx.bind('<<ComboboxSelected>>', self.set_dash)
@@ -202,7 +202,7 @@ class GUI(framework.GUIFramework):
             
     def arrow_options_combobox(self):
             Label(self.topbar,text='Arrow:').pack(side=LEFT)
-            self.arrowcmbobx = ttk.Combobox(self.topbar, state='readonly', width=5)
+            self.arrowcmbobx = tkinter.ttk.Combobox(self.topbar, state='readonly', width=5)
             self.arrowcmbobx.pack(side=LEFT)
             self.arrowcmbobx['values'] = ('none', 'first', 'last', 'both')
             self.arrowcmbobx.bind('<<ComboboxSelected>>', self.set_arrow)
@@ -344,7 +344,7 @@ class GUI(framework.GUIFramework):
         self.root.title('untitled')
     
     def open_file(self):
-        self.filename = tkFileDialog.askopenfilename(master = self.root,
+        self.filename = tkinter.filedialog.askopenfilename(master = self.root,
                                    filetypes = [('All Files',('*.jpg', '*.png', '*.tif', '*.gif')),
                                                 ('jpeg','*.jpg'),('png','*.png'),('tiff','*.tif'), ('gif','*.gif')],title="Open...")
         if not self.filename: return
@@ -369,7 +369,7 @@ class GUI(framework.GUIFramework):
 
     def save_as(self):
         try:
-            self.filename = tkFileDialog.asksaveasfilename(master = self.root,filetypes = [('All Files',('*.ps', '*.ps'))], title="Save...")
+            self.filename = tkinter.filedialog.asksaveasfilename(master = self.root,filetypes = [('All Files',('*.ps', '*.ps'))], title="Save...")
         except:pass
         self.actual_save()
         
@@ -378,11 +378,11 @@ class GUI(framework.GUIFramework):
         self.root.title(self.filename)
 
     def about(self, event=None):
-        tkMessageBox.showinfo("About","Tkinter GUI Application\n Development Hotshot")
+        tkinter.messagebox.showinfo("About","tkinter GUI Application\n Development Hotshot")
 
 
     def close(self, event=None):
-        if tkMessageBox.askokcancel("Quit", "Do you really want to quit?"):
+        if tkinter.messagebox.askokcancel("Quit", "Do you really want to quit?"):
             self.root.destroy()
 
 

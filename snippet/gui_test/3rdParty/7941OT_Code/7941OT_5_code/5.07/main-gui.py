@@ -11,12 +11,12 @@ create_bottom_frame
 tootip addded for each button in both these frames
 
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """ 
-from Tkinter  import *
-import tkFileDialog
-import tkMessageBox
-import ttk
+from tkinter  import *
+import tkinter.filedialog
+import tkinter.messagebox
+import tkinter.ttk
 import os
 import time
 
@@ -63,7 +63,7 @@ class GUI:
         self.songname = self.canvas.create_text(115, 37, anchor=W, fill='#9CEDAC', font="Verdana 10",
             text='\"Currently playing: none [00.00] \"')
         
-        self.progressBar = ttk.Progressbar(cnslfrm, length =1, mode="determinate")
+        self.progressBar = tkinter.ttk.Progressbar(cnslfrm, length =1, mode="determinate")
         self.progressBar.grid(row=2, columnspan=10, sticky='ew', padx=5)
         
     
@@ -114,7 +114,7 @@ class GUI:
         self.balloon.bind(self.mutebtn, 'Mute/Unmute')
 
         
-        self.volscale = ttk.Scale(buttonframe, from_=0.0, to =1.0  , command=self.vol_update)
+        self.volscale = tkinter.ttk.Scale(buttonframe, from_=0.0, to =1.0  , command=self.vol_update)
         self.volscale.set(0.6)
         self.volscale.grid(row=3, column=7 , padx=5)
         
@@ -188,13 +188,13 @@ class GUI:
   
   
     def add_file(self):
-        tfile = tkFileDialog.askopenfilename(filetypes=[('All supported', '.mp3 .wav'), ('.mp3 files', '.mp3'), ('.wav files','.wav')])
+        tfile = tkinter.filedialog.askopenfilename(filetypes=[('All supported', '.mp3 .wav'), ('.mp3 files', '.mp3'), ('.wav files','.wav')])
         self.listbox.insert(END, tfile)
         self.alltracks = list(self.listbox.get(0, END))
         
         
     def add_dir(self): 
-        path = tkFileDialog.askdirectory()
+        path = tkinter.filedialog.askdirectory()
         tfileList = []
         for (dirpath, dirnames, filenames) in os.walk(path):
             for tfile in filenames:
@@ -308,7 +308,7 @@ class GUI:
     
           
     def close_player(self):
-        if tkMessageBox.askokcancel("Quit", "Do you really want to quit?"):
+        if tkinter.messagebox.askokcancel("Quit", "Do you really want to quit?"):
             try:
                 self.player.pause()
             except:

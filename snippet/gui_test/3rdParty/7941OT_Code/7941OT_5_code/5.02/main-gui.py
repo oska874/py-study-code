@@ -22,14 +22,14 @@ __init__: added newly defined list_frame method to be intiailized within the mai
 create_bottom_frame() - added 3 new buttons: delete file, add directory & delete all     
 
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """ 
 
 
 
 
-from Tkinter  import *
-import tkFileDialog
+from tkinter  import *
+import tkinter.filedialog
 import os
 import time
 
@@ -104,14 +104,14 @@ class GUI:
   
   
     def add_file(self):
-        filename = tkFileDialog.askopenfilename(filetypes=[('All supported', '.mp3 .wav'), ('.mp3 files', '.mp3'), ('.wav files','.wav')])
+        filename = tkinter.filedialog.askopenfilename(filetypes=[('All supported', '.mp3 .wav'), ('.mp3 files', '.mp3'), ('.wav files','.wav')])
         if filename:
             self.listbox.insert(END, filename)
             self.alltracks = list(self.listbox.get(0, END))
         
         
     def add_dir(self): 
-        path = tkFileDialog.askdirectory()
+        path = tkinter.filedialog.askdirectory()
         if path:
             tfileList = []
             for (dirpath, dirnames, filenames) in os.walk(path):

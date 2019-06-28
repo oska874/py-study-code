@@ -3,12 +3,12 @@ Code illustration: 7.02
 
 Threading with Queue Simple Demo
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
 
 
-import Queue
+import queue
 import threading
 
 class Worker(threading.Thread):
@@ -22,11 +22,11 @@ class Worker(threading.Thread):
             self.taskHandler(job)
  
    def taskHandler(self, job):
-        print 'doing task %s'%job
+        print('doing task %s'%job)
         self.queue.task_done()
        
 def main(tasks):
-    queue = Queue.Queue()
+    queue = queue.Queue()
     #populate queue with tasks 
     for task in tasks:
         queue.put(task)
@@ -38,7 +38,7 @@ def main(tasks):
 
     # wait for the queue to finish
     queue.join()
-    print 'all tasks completed'
+    print('all tasks completed')
  
 if __name__ == "__main__":
     tasks = 'A B C D E F'.split()

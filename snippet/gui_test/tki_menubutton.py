@@ -1,8 +1,8 @@
 # -*- coding: UTF-8 -*-
 
-from Tkinter import *
+from tkinter import *
 import tkMessageBox
-import Tkinter
+import tkinter
 
 top = Tk()
 

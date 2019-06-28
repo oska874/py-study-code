@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-from Tkinter import *           # 导入 Tkinter 库
+from tkinter import *           # 导入 tkinter 库
 root = Tk()                     # 创建窗口对象的背景色
                                 # 创建两个列表
 li     = ['C','python','php','html','SQL','java']

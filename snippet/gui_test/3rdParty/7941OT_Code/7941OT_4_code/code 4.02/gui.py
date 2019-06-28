@@ -2,10 +2,10 @@
 Code illustration: 4.02
 #no changes
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
-from Tkinter import *
+from tkinter import *
 import chessboard
 
 

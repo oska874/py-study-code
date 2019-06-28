@@ -1,9 +1,9 @@
 """
 Code illustration: 8.07
 Formatting Entry Widget
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
-from Tkinter import *
+from tkinter import *
 class FormatEntryWidgetDemo:
     def __init__(self, root):
         Label(root, text='Date(MM/DD/YYYY)').pack()

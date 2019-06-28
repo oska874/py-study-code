@@ -1,6 +1,6 @@
 import sys
 
-from Tkinter import Button,mainloop
+from tkinter import Button,mainloop
 x=Button(text="pm",command=(lambda:sys.stdout.write('12345')))
 
 x.pack()

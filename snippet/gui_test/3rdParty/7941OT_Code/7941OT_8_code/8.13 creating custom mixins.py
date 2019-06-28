@@ -1,10 +1,10 @@
 """
 Code illustration: 8.13
 Creating Custom Mixins
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
-from Tkinter import *
+from tkinter import *
 
 def frame(parent,  row, col):
     widget = Frame(parent)
@@ -27,8 +27,8 @@ def entry(parent,  row, col, var):
     return widget
 
 def button_pressed(uname, pwd):
-    print 'Username: %s' %uname
-    print 'Password: %s'%pwd
+    print('Username: %s' %uname)
+    print('Password: %s'%pwd)
 
 if __name__ == '__main__':
     root = Tk()

@@ -2,7 +2,7 @@
 Code illustration: 4.02
 1) Getting the basic piece model in place
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
 import sys

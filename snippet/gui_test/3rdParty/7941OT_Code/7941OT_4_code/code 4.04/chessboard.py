@@ -3,7 +3,7 @@ Code illustration: 4.04
 
 --> No changes from the previous iteration
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 import pieces
 import re

@@ -9,7 +9,7 @@ king_in_check
 Methods modfied:
 None
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 import pieces
 import re
@@ -64,7 +64,7 @@ class Board(dict):
     def all_moves_available(self, color):
         
         result = []
-        for coord in self.keys():
+        for coord in list(self.keys()):
             if (self[coord] is not None) and self[coord].color == color:
                 moves = self[coord].moves_available(coord)
                 if moves: result += moves
@@ -72,7 +72,7 @@ class Board(dict):
 
 
     def position_of_king(self, color):
-        for pos in self.keys():
+        for pos in list(self.keys()):
             if isinstance(self[pos], pieces.King) and self[pos].color == color:
                 return pos
 
@@ -80,7 +80,7 @@ class Board(dict):
         
         kingpos =  self.position_of_king(color)
         opponent = ('black' if color =='white' else 'white')
-        for pieces in self.iteritems():
+        for pieces in self.items():
             if kingpos in self.all_moves_available(opponent):
                 return True
             else:

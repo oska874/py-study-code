@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-from Tkinter import *
+from tkinter import *
 
 def sel():
    selection = "You selected the option " + str(var.get())

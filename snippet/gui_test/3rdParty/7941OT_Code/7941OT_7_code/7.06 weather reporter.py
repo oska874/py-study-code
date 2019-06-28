@@ -3,17 +3,17 @@ Code illustration: 7.06
 
 Weather Reporter
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 # -*- coding: utf-8 -*-
 
-from Tkinter import *
-import ttk
-import urllib
+from tkinter import *
+import tkinter.ttk
+import urllib.request, urllib.parse, urllib.error
 import datetime
 import json
 from PIL import ImageTk
-import tkMessageBox
+import tkinter.messagebox
 
 class WeatherReporter:
     def __init__(self, root):
@@ -27,7 +27,7 @@ class WeatherReporter:
         Label(topfrm, text='Enter Location').grid(row=1, column=2, sticky='w')
         self.enteredlocation = StringVar()
         Entry(topfrm, textvariable=self.enteredlocation).grid(row=1, column=3, sticky='w')
-        ttk.Button(topfrm, text='Show Weather Info', command= self.show_weather_button_clicked).grid(row=1, column=4, sticky='w')
+        tkinter.ttk.Button(topfrm, text='Show Weather Info', command= self.show_weather_button_clicked).grid(row=1, column=4, sticky='w')
         
     def display_frame(self):
         displayfrm = Frame(self.root)
@@ -50,7 +50,7 @@ class WeatherReporter:
         try:
             data['name']
         except:
-            tkMessageBox.showerror('Name not found', 'Unable to fetch record - Name not found') 
+            tkinter.messagebox.showerror('Name not found', 'Unable to fetch record - Name not found') 
             return
         self.canvas.create_text( 30, 30, text=data['name'], fill='white', font="Purisa 16", anchor=NW) 
         self.canvas.create_text( 245, 35, text='Latitude :  '+'%.3f'%(float(data['lat'])), fill='white', font="Purisa 10")  
@@ -68,9 +68,9 @@ class WeatherReporter:
         #temperature
         tempr = float(data['temp'])/10.0
         self.canvas.create_text( 85,155, text='Temperature', fill='white', font="Purisa 14")
-        self.canvas.create_text( 87,175, text=str('%.2f'%(float(data['temp_min'])/10.0))+u' \u2103'.encode('utf-8')+ ' ~ ' + str('%.2f'%(float(data['temp_max'])/10.0))+u' \u2103'.encode('utf-8'), fill='white', font="Purisa 9")
-        self.canvas.create_text( 225, 140, text=str(tempr)+u' \u2103'.encode('utf-8'), fill='white', font="Purisa 18") #celcius
-        self.canvas.create_text( 225, 180, text=str(self.celcius_to_fahrenheit(tempr))+u' \u2109'.encode('utf-8'), fill='white', font="Purisa 18") #fahrenheit
+        self.canvas.create_text( 87,175, text=str('%.2f'%(float(data['temp_min'])/10.0))+' \u2103'.encode('utf-8')+ ' ~ ' + str('%.2f'%(float(data['temp_max'])/10.0))+' \u2103'.encode('utf-8'), fill='white', font="Purisa 9")
+        self.canvas.create_text( 225, 140, text=str(tempr)+' \u2103'.encode('utf-8'), fill='white', font="Purisa 18") #celcius
+        self.canvas.create_text( 225, 180, text=str(self.celcius_to_fahrenheit(tempr))+' \u2109'.encode('utf-8'), fill='white', font="Purisa 18") #fahrenheit
         
         #humidity
         self.canvas.create_text( 95,215, text='Relative Humidity', fill='white', font="Purisa 12")
@@ -88,7 +88,7 @@ class WeatherReporter:
         self.canvas.create_text( 225, 275, text=data['pressure']+' millibars' ,fill='white', font="Purisa 12") #rh
         
         #rain in last 3 hours
-        if data.has_key('3h'):
+        if '3h' in data:
             self.canvas.create_text( 83,293, text='Rain (Last 3h)', fill='white', font="Purisa 12")
             self.canvas.create_text( 200, 293, text=data['3h']+' mm' ,fill='white', font="Purisa 12") #rain
         
@@ -124,24 +124,24 @@ class WeatherReporter:
     def get_weather_data(self):
         try:
             apiurl = 'http://api.openweathermap.org/data/2.5/weather?q=%s'%self.enteredlocation.get()
-            data =  urllib.urlopen(apiurl)
+            data =  urllib.request.urlopen(apiurl)
             jdata= data.read()
             return jdata
         except IOError as e:
-             tkMessageBox.showerror('Unable to connect', 'Unable to connect %s'%e) 
+             tkinter.messagebox.showerror('Unable to connect', 'Unable to connect %s'%e) 
             
         
     def json_to_dict(self, jdata):
         mydecoder = json.JSONDecoder()
         decodedjdata = mydecoder.decode(jdata)
         flatteneddict = {}
-        for key, value in decodedjdata.items():
+        for key, value in list(decodedjdata.items()):
             if key == 'weather':
-                for ke,va in value[0].items():
+                for ke,va in list(value[0].items()):
                         flatteneddict[str(ke)] = str(va).upper() 
                 continue
             try:
-                for k,v in value.items():
+                for k,v in list(value.items()):
                         flatteneddict[str(k)] = str(v).upper()
             except:
                 flatteneddict[str(key)] = str(value).upper()

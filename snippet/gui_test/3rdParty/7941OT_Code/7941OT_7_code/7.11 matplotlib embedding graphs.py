@@ -3,10 +3,10 @@ Code illustration: 7.11
 
 Embedding Matplotlib graph on tkinter
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
-import Tkinter as Tk
+import tkinter as Tk
 from numpy import arange, sin, pi
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
 from matplotlib.figure import Figure

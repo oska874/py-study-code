@@ -2,11 +2,11 @@
 Code illustration: 2.05
 A demonstration of different types of top-level window
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """ 
 
 
-from Tkinter import *
+from tkinter import *
 root = Tk()
 
 #top level window

@@ -21,17 +21,17 @@ mouse_down_motion
 mouse_up
 show_current_coordinates
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
 
 
-from Tkinter  import *
-import tkFileDialog
-import tkMessageBox
+from tkinter  import *
+import tkinter.filedialog
+import tkinter.messagebox
 import Image
 import ImageTk
-from tkColorChooser import askcolor
+from tkinter.colorchooser import askcolor
 import framework
 
 
@@ -85,7 +85,7 @@ class GUI(framework.GUIFramework):
             self.button.grid(row=i/2, column=1+i%2, sticky='nsew')
 
     def selected_tool_bar_item(self, i):
-        print 'You selected {}'.format(i)
+        print('You selected {}'.format(i))
             
                 
     def create_color_pallete(self):
@@ -155,7 +155,7 @@ class GUI(framework.GUIFramework):
         self.root.title('untitled')
     
     def open_file(self):
-        self.filename = tkFileDialog.askopenfilename(master = self.root,
+        self.filename = tkinter.filedialog.askopenfilename(master = self.root,
                                    filetypes = [('All Files',('*.jpg', '*.png', '*.tif', '*.gif')),
                                                 ('jpeg','*.jpg'),('png','*.png'),('tiff','*.tif'), ('gif','*.gif')],title="Open...")
         if not self.filename: return
@@ -180,7 +180,7 @@ class GUI(framework.GUIFramework):
 
     def save_as(self):
         try:
-            self.filename = tkFileDialog.asksaveasfilename(master = self.root,filetypes = [('All Files',('*.ps', '*.ps'))], title="Save...")
+            self.filename = tkinter.filedialog.asksaveasfilename(master = self.root,filetypes = [('All Files',('*.ps', '*.ps'))], title="Save...")
         except:pass
         self.actual_save()
         
@@ -189,11 +189,11 @@ class GUI(framework.GUIFramework):
         self.root.title(self.filename)
 
     def about(self, event=None):
-        tkMessageBox.showinfo("About","Tkinter GUI Application\n Development Hotshot")
+        tkinter.messagebox.showinfo("About","tkinter GUI Application\n Development Hotshot")
 
 
     def close(self, event=None):
-        if tkMessageBox.askokcancel("Quit", "Do you really want to quit?"):
+        if tkinter.messagebox.askokcancel("Quit", "Do you really want to quit?"):
             self.root.destroy()
 
 

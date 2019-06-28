@@ -2,7 +2,7 @@
 Code illustration: 4.03
 Displaying Pieces on the board
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
 import sys

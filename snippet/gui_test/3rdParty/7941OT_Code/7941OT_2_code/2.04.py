@@ -7,10 +7,10 @@ Implementation of:
 2. on_find
 
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """ 
-from Tkinter import *
-import tkFileDialog
+from tkinter import *
+import tkinter.filedialog
 root = Tk()
 root.geometry('350x350')
 

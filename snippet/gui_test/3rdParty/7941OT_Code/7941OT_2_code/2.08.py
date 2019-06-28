@@ -2,12 +2,12 @@
 Code illustration: 2.08
 A demonstration of tkMessageBox
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """ 
 
 
-from Tkinter import *
-import tkMessageBox
+from tkinter import *
+import tkinter.messagebox
 
 root = Tk()
 
@@ -19,22 +19,22 @@ opt = {'fill': BOTH, 'side':LEFT, 'padx': 2, 'pady': 3}
 #Demo of tkMessageBox
 Label(fr1, text="Demo of tkMessageBox").pack()
 def warn():
-    tkMessageBox.showwarning("Beware", "Don't be silly")
+    tkinter.messagebox.showwarning("Beware", "Don't be silly")
 
 def info():
-    tkMessageBox.showinfo("FYI", "This is FYI")
+    tkinter.messagebox.showinfo("FYI", "This is FYI")
 
 def error():
-    tkMessageBox.showerror("Err..", "its leaking.")
+    tkinter.messagebox.showerror("Err..", "its leaking.")
 
 def question():
-    tkMessageBox.askquestion("?", "Can you read this ?")
+    tkinter.messagebox.askquestion("?", "Can you read this ?")
 def okcancel():
-    tkMessageBox.askokcancel("OK", "Quit Postponing ?")
+    tkinter.messagebox.askokcancel("OK", "Quit Postponing ?")
 def yesno():
-    tkMessageBox.askyesno("Yes or No", "Are you incapable of saying yes?")
+    tkinter.messagebox.askyesno("Yes or No", "Are you incapable of saying yes?")
 def retrycancel():
-    tkMessageBox.askretrycancel("Retry", "Load Failed")
+    tkinter.messagebox.askretrycancel("Retry", "Load Failed")
 
 
 Button(fr1, text='warning', command=warn).pack(opt)

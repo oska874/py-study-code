@@ -5,10 +5,10 @@ Displaying the Pieces
 New method added:
 draw_pieces
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
-from Tkinter import *
+from tkinter import *
 import chessboard
 from PIL import ImageTk
 
@@ -43,7 +43,7 @@ class GUI(dict):
 
     def draw_pieces(self): # new method defined here
         self.canvas.delete("occupied")
-        for xycoord, piece in self.chessboard.iteritems(): # iterates through the chess board instance created above in the __init__ method
+        for xycoord, piece in self.chessboard.items(): # iterates through the chess board instance created above in the __init__ method
             x,y = self.chessboard.num_notation(xycoord)
             if piece is not None:
                 filename = "../pieces_image/%s%s.png" % (piece.shortname.lower(),piece.color)

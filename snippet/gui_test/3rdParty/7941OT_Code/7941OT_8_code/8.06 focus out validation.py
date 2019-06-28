@@ -1,9 +1,9 @@
 """
 Code illustration: 8.06
 validate='focusout' demo
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
-import Tkinter as tk
+import tkinter as tk
 import re
 
 

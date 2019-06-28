@@ -1,15 +1,15 @@
 """
 Code illustration: 8.01
-Tkinter Trace Variable Demo
+tkinter Trace Variable Demo
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
-from Tkinter import *
+from tkinter import *
 root = Tk()
 myvar = StringVar()
 def trace_when_myvar_written(var,indx,mode):
-    print "Traced variable %s"%myvar.get()
+    print("Traced variable %s"%myvar.get())
     #print 'mode: %s'%mode
 
 myvar.trace_variable("w", trace_when_myvar_written)

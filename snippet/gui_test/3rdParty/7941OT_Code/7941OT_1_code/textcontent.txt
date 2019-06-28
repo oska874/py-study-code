@@ -1,5 +1,5 @@
 I am a text-widget.
-Tkinter includes 21 core widgets. This program demonstrates all of them.
+tkinter includes 21 core widgets. This program demonstrates all of them.
 
 See if you can identify all of them
 

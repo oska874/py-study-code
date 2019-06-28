@@ -20,11 +20,11 @@ shift
 focus
 
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 import chessboard
 import pieces
-from Tkinter import *
+from tkinter import *
 from PIL import ImageTk
 
 class GUI():
@@ -91,7 +91,7 @@ class GUI():
             piece=None
         if piece is not None and (piece.color == self.chessboard.player_turn):
             self.selected_piece = (self.chessboard[pos], pos)
-            self.focused = map(self.chessboard.num_notation, (self.chessboard[pos].moves_available(pos)))
+            self.focused = list(map(self.chessboard.num_notation, (self.chessboard[pos].moves_available(pos))))
 
     def draw_board(self, event={}):
         color = self.color2
@@ -118,7 +118,7 @@ class GUI():
 
     def draw_pieces(self):
         self.canvas.delete("occupied")
-        for coord, piece in self.chessboard.iteritems():
+        for coord, piece in self.chessboard.items():
             x,y = self.chessboard.num_notation(coord)
             if piece is not None:
                 filename = "../pieces_image/%s%s.png" % (piece.shortname.lower(),piece.color)

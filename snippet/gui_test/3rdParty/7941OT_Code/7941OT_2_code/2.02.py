@@ -4,9 +4,9 @@ Text Editor Code
 Step 3: Adding  Menu items to each menu
 Step 4: Adding labels to hold shortcut toolbar and line number
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """ 
-from Tkinter import *
+from tkinter import *
 root = Tk()
 
 

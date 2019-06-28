@@ -13,10 +13,10 @@ create_button_frame - added all control buttons
 
 '''
 
-from Tkinter  import *
-import tkFileDialog
-import tkMessageBox
-import ttk
+from tkinter  import *
+import tkinter.filedialog
+import tkinter.messagebox
+import tkinter.ttk
 import os
 
 
@@ -82,7 +82,7 @@ class GUI:
         self.mutebtn.grid(row=3, column=6)
     
         
-        self.volscale = ttk.Scale(buttonframe, from_=0.0, to =1.0  , command=self.vol_update)
+        self.volscale = tkinter.ttk.Scale(buttonframe, from_=0.0, to =1.0  , command=self.vol_update)
         self.volscale.set(0.6)
         self.volscale.grid(row=3, column=7 , padx=5)
         
@@ -138,13 +138,13 @@ class GUI:
   
   
     def add_file(self):
-        filename = tkFileDialog.askopenfilename(filetypes=[('All supported', '.mp3 .wav'), ('.mp3 files', '.mp3'), ('.wav files','.wav')])
+        filename = tkinter.filedialog.askopenfilename(filetypes=[('All supported', '.mp3 .wav'), ('.mp3 files', '.mp3'), ('.wav files','.wav')])
         if filename:
             self.listbox.insert(END, filename)
             self.alltracks = list(self.listbox.get(0, END))
         
     def add_dir(self): 
-        path = tkFileDialog.askdirectory()
+        path = tkinter.filedialog.askdirectory()
         if path:
             tfileList = []
             for (dirpath, dirnames, filenames) in os.walk(path):

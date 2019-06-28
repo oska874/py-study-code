@@ -3,11 +3,11 @@ Code illustration: 7.07
 
 Phonebook Application
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
-from Tkinter import *
-import ttk
+from tkinter import *
+import tkinter.ttk
 import sqlite3
 
 
@@ -30,22 +30,22 @@ class PhoneBook:
         self.num= IntVar()
         self.numfield = Entry(fr, textvariable= self.num)
         self.numfield.grid(row=2, column=2, sticky=W,padx=5, pady=2)
-        ttk.Button(fr, text= 'Add Record', command=self.create_record).grid(row=3, column=2, sticky=E,padx=5, pady=2)
-        showbtn = ttk.Button(text="Show Records", command = self.view_records)
+        tkinter.ttk.Button(fr, text= 'Add Record', command=self.create_record).grid(row=3, column=2, sticky=E,padx=5, pady=2)
+        showbtn = tkinter.ttk.Button(text="Show Records", command = self.view_records)
         showbtn.grid(row=3, column=0, sticky=W)
         
         self.msg=Label(text='', fg='red')
         self.msg.grid(row=3, column=1, sticky=W)
         
-        self.tree = ttk.Treeview(height=5, columns=2)
+        self.tree = tkinter.ttk.Treeview(height=5, columns=2)
         self.tree.grid(row=4, column=0, columnspan=2)
         self.tree.heading('#0', text='Name', anchor=W)
         self.tree.heading(2, text='Phone Number', anchor=W)
 
-        delbtn = ttk.Button(text="Delete Selected", command = self.delete_record)
+        delbtn = tkinter.ttk.Button(text="Delete Selected", command = self.delete_record)
         delbtn.grid(row=5, column=0, sticky=W)
         
-        updtbtn = ttk.Button(text="Modify Selected", command = self.open_modify_window)
+        updtbtn = tkinter.ttk.Button(text="Modify Selected", command = self.open_modify_window)
         updtbtn.grid(row=5, column=1, sticky=W)
         #self.view_records()
         

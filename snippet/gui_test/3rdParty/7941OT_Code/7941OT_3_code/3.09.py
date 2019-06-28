@@ -3,12 +3,12 @@
 Code illustration: 3.09
 Object Persistence: pickling and unpickling
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """ 
 
-from Tkinter import *
-import tkFileDialog
-import tkMessageBox
+from tkinter import *
+import tkinter.filedialog
+import tkinter.messagebox
 import os
 
 #modules for playing sounds
@@ -35,24 +35,24 @@ class DrumMachine():
         
 
     def about(self):
-        tkMessageBox.showinfo("About","Tkinter GUI Application\n Development Hotshot")
+        tkinter.messagebox.showinfo("About","tkinter GUI Application\n Development Hotshot")
 
         
     def exit_app(self):
-        if tkMessageBox.askokcancel("Quit", "Do you really want to quit?"):
+        if tkinter.messagebox.askokcancel("Quit", "Do you really want to quit?"):
             self.root.destroy()
 
 
     def save_project(self):
         self.record_pattern()#make sure the last pattern is recorded before save
-        file_name = tkFileDialog.asksaveasfilename(filetypes=[('Drum Beat File','*.bt')] , title="Save project as...")
+        file_name = tkinter.filedialog.asksaveasfilename(filetypes=[('Drum Beat File','*.bt')] , title="Save project as...")
         pickle.dump( self.pattern_list, open( file_name, "wb" ) )
         self.root.title(os.path.basename(file_name) + " - DrumBeast")
         
         
                     
     def load_project(self):
-        file_name = tkFileDialog.askopenfilename(filetypes=[('Drum Beat File','*.bt')], title='Load Project')
+        file_name = tkinter.filedialog.askopenfilename(filetypes=[('Drum Beat File','*.bt')], title='Load Project')
         if file_name == '':return
         self.root.title(os.path.basename(file_name) + " - DrumBeast")
         fh = open(file_name,"rb") # open the file in reading mode
@@ -64,7 +64,7 @@ class DrumMachine():
         fh.close()
         try:
             self.reconstruct_pattern(0, self.pattern_list[0]['bpu'], self.pattern_list[0]['units'])# reconstruct the first pattern
-        except:tkMessageBox.showerror("Error","An unexpected error occurred trying to reconstruct patterns")
+        except:tkinter.messagebox.showerror("Error","An unexpected error occurred trying to reconstruct patterns")
 
     
     def record_pattern(self):
@@ -171,7 +171,7 @@ class DrumMachine():
         def callback(): 
             self.current_drum_no = drum_no
             try:
-                file_name = tkFileDialog.askopenfilename(defaultextension=".wav",filetypes=[("Wave Files","*.wav"),("OGG Files","*.ogg")])
+                file_name = tkinter.filedialog.askopenfilename(defaultextension=".wav",filetypes=[("Wave Files","*.wav"),("OGG Files","*.ogg")])
                 if not file_name: return
                 try:
                     del self.widget_drum_file_name[drum_no]
@@ -181,7 +181,7 @@ class DrumMachine():
                 self.widget_drum_name[drum_no].delete(0, END)
                 self.widget_drum_name[drum_no].insert(0, drum_name)
             except:
-                tkMessageBox.showerror('Invalid', "Error loading drum samples")
+                tkinter.messagebox.showerror('Invalid', "Error loading drum samples")
             
         return callback
 

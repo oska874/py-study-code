@@ -10,7 +10,7 @@ METHODS MODIFIED:
 -----------------------
 start_play_thread - added a call to song_len to get the song length
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """ 
 
 
@@ -111,4 +111,4 @@ class Player():
     
         
 if __name__ == '__main__':
-    print 'a pyglet player class implementation'
+    print('a pyglet player class implementation')

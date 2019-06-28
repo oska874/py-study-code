@@ -2,10 +2,10 @@
 Code illustration: 01.03
 A demonstration of all core tkinter widgets
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """ 
 
-from Tkinter import *
+from tkinter import *
 
 
 root = Tk()

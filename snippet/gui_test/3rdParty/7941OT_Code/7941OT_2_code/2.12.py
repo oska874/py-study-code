@@ -5,13 +5,13 @@ Features Added:
 2.	Contextual Menu
 3.      Add TitleBar Icon
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """
 
-from Tkinter import *
-import tkFileDialog
+from tkinter import *
+import tkinter.filedialog
 import os
-import tkMessageBox
+import tkinter.messagebox
 
 root = Tk()
 root.geometry('350x350')
@@ -49,7 +49,7 @@ def update_line_number(event=None):
     txt = ''
     if showln.get(): 
         endline, endcolumn = textPad.index('end-1c').split('.')
-        txt = '\n'.join(map(str, range(1, int(endline))))
+        txt = '\n'.join(map(str, list(range(1, int(endline)))))
     lnlabel.config(text=txt, anchor='nw')
 
 
@@ -72,15 +72,15 @@ def toggle_highlight(event=None):
 
     #Defining about method
 def about(event=None):
-    tkMessageBox.showinfo("About","Tkinter GUI Application\n Development Hotshot")
+    tkinter.messagebox.showinfo("About","tkinter GUI Application\n Development Hotshot")
 
     #Defining help method
 def help_box(event=None):
-    tkMessageBox.showinfo("Help","For help refer to book:\n Tkinter GUI Application\n Development Hotshot", icon='question')
+    tkinter.messagebox.showinfo("Help","For help refer to book:\n tkinter GUI Application\n Development Hotshot", icon='question')
 
 
 def exit_editor(event=None):
-    if tkMessageBox.askokcancel("Quit", "Do you really want to quit?"):
+    if tkinter.messagebox.askokcancel("Quit", "Do you really want to quit?"):
         root.destroy()
 
 root.protocol('WM_DELETE_WINDOW', exit_editor) # override close button and redirect to exit_editor
@@ -95,7 +95,7 @@ def new_file(event=None):
     
 def open_file(event=None):
     global filename
-    filename = tkFileDialog.askopenfilename(defaultextension=".txt",filetypes=[("All Files","*.*"),("Text Documents","*.txt")])
+    filename = tkinter.filedialog.askopenfilename(defaultextension=".txt",filetypes=[("All Files","*.*"),("Text Documents","*.txt")])
     if filename == "": # If no file chosen.
         filename = None # Absence of file.
     else:
@@ -123,7 +123,7 @@ def save(event=None):
 def save_as(event=None):
     try:
         # Getting a filename to save the file.
-        f = tkFileDialog.asksaveasfilename(initialfile='Untitled.txt',defaultextension=".txt",filetypes=[("All Files","*.*"),("Text Documents","*.txt")])
+        f = tkinter.filedialog.asksaveasfilename(initialfile='Untitled.txt',defaultextension=".txt",filetypes=[("All Files","*.*"),("Text Documents","*.txt")])
         fh = open(f, 'w')           
         textoutput = textPad.get(0.0, END)
         fh.write(textoutput)              

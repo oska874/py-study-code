@@ -3,11 +3,11 @@ Code illustration: 7.01
 
 Screensaver
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
 
-from Tkinter import *
+from tkinter import *
 from random import randint
 
 # A class to generate balls with random attributes

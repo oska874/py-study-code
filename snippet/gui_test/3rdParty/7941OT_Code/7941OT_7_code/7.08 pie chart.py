@@ -3,21 +3,21 @@ Code illustration: 7.08
 
 Piechart
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
 
-import Tkinter
+import tkinter
 
-root = Tkinter.Tk()
+root = tkinter.Tk()
 
 #pie chart
 def prop(n): 
     return 360.0 * n / 1000
 
-Tkinter.Label(root, text='Pie Chart').pack()
+tkinter.Label(root, text='Pie Chart').pack()
 
-c = Tkinter.Canvas(width=154, height=154); c.pack()
+c = tkinter.Canvas(width=154, height=154); c.pack()
 
 c.create_arc((2,2,152,152), fill="#FAF402", outline="#FAF402", start=prop(0), extent = prop(200))
 c.create_arc((2,2,152,152), fill="#00AC36", outline="#00AC36", start=prop(200), extent = prop(400))

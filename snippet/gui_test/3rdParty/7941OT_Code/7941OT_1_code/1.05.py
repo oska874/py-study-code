@@ -2,10 +2,10 @@
 Code illustration: 1.05
 Where to use pack() options
 
-@Tkinter GUI Application Development Hotshot
+@tkinter GUI Application Development Hotshot
 """
 
-from Tkinter import *
+from tkinter import *
 root = Tk()
 fr = Frame(root)
 

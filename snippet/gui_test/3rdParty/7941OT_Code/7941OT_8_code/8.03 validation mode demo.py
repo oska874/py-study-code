@@ -3,10 +3,10 @@ Code illustration: 8.03
 
 Validation Modes Demo
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
-import Tkinter as tk
+import tkinter as tk
 
 class ValidateModeDemo():
     def __init__(self):
@@ -43,7 +43,7 @@ class ValidateModeDemo():
         self.root.mainloop()
 
     def validate(self, v):
-        print 'Called Just Now Via Mode %s' %v
+        print('Called Just Now Via Mode %s' %v)
         # this is where you will validate your data and return True or False
         #depending on wether the data is valid or not
         # for now let us just return True for all cases.

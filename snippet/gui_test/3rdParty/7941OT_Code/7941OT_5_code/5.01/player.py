@@ -3,7 +3,7 @@ Code illustration: 5.01
 
 Basic implemetation of pyglet player class
 
-Tkinter GUI Application Development Hotshot
+tkinter GUI Application Development Hotshot
 """ 
 
 
@@ -35,4 +35,4 @@ class Player():
 
         
 if __name__ == '__main__':
-    print 'a pyglet player class implementation'
+    print('a pyglet player class implementation')
