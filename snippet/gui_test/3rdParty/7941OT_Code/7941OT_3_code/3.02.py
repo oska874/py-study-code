@@ -39,7 +39,6 @@ class DrumMachine():
             button.grid(row=i, column=0,  padx=5,pady=2)
             self.drum_entry = Entry(left_frame)
             self.drum_entry.grid(row=i, column=4, padx=7,pady=2)
-            
 
 
     def create_right_pad(self):
@@ -51,6 +50,7 @@ class DrumMachine():
                 self.button[i][j] = Button(right_frame, bg='grey55')
                 self.button[i][j].grid(row=i, column=j)
 
+
     def create_top_bar(self):
         '''creating top buttons'''
         topbar_frame = Frame(self.root)
@@ -59,20 +59,15 @@ class DrumMachine():
 
         Label(topbar_frame, text='Units:').grid(row=0, column=4)
         self.units = IntVar()
-        self.units.set(4)
-        self.units_widget = Spinbox(topbar_frame, from_=1, to=8, width=5, textvariable=self.units)
+        self.units.set(9)
+        self.units_widget = Spinbox(topbar_frame, from_=1, to=80, width=5, textvariable=self.units)
         self.units_widget.grid(row=0, column=5)
         
-        
-
         Label(topbar_frame, text='BPUs:').grid(row=0, column=6)
         self.bpu = IntVar()
-        self.bpu.set(4)
+        self.bpu.set(5)
         self.bpu_widget = Spinbox(topbar_frame, from_=1, to=10, width=5, textvariable=self.bpu)
         self.bpu_widget.grid(row=0, column=7)
-        
-        
-        
 
 
     def app(self):

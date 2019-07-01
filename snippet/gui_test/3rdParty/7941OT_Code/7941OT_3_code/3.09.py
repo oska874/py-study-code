@@ -14,7 +14,7 @@ import os
 #modules for playing sounds
 import time
 import wave
-import pymedia.audio.sound as sound
+###import pymedia.audio.sound as sound
 
 import threading
 import pickle
@@ -145,6 +145,7 @@ class DrumMachine():
                             if self.loop == False: self.keep_playing = False
 
     def play_sound(self, sound_filename):
+        return
         try:
             self.s = wave.open(sound_filename, 'rb')
             sample_rate = self.s.getframerate()

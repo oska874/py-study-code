@@ -14,7 +14,7 @@ import os
 #modules for playing sounds
 import time
 import wave
-import pymedia.audio.sound as sound
+#import pymedia.audio.sound as sound
 
 import threading
 
@@ -44,7 +44,7 @@ class DrumMachine():
                                 try:
                                     if item[i].cget('bg') == 'green':
                                         if not self.widget_drum_file_name[self.button.index(item)]:continue
-                                        sound_filename = self.widget_drum_file_name[self.button.index(item)]
+                                        ####sound_filename = self.widget_drum_file_name[self.button.index(item)]
                                         self.play_sound(sound_filename)
                                         #self.root.update() # a rather inelegant hack
                                 except:continue
@@ -53,6 +53,8 @@ class DrumMachine():
                 self.start_button.config(state='normal')
                             
     def play_sound(self, sound_filename):
+        return
+
         try:
             self.s = wave.open(sound_filename, 'rb')
             sample_rate = self.s.getframerate()

@@ -14,7 +14,7 @@ import os
 #modules for playing sounds
 import time
 import wave
-import pymedia.audio.sound as sound
+###import pymedia.audio.sound as sound
 
 import threading
 import pickle
@@ -86,8 +86,6 @@ class DrumMachine():
         self.pattern_list[prevpval] = {'df': self.widget_drum_file_name, 'bl': self.buttonpickleformat, 'bpu':bpu, 'units':units}
         self.reconstruct_pattern(pattern_num, bpu, units)
 
-    
-        
 
     def reconstruct_pattern(self,pattern_num, bpu, units):
         self.widget_drum_file_name = [0]*MAX_DRUM_NUM

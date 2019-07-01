@@ -41,9 +41,10 @@ class GUI(dict):
         
 def main(chessboard):
     root = Tk()
-    root.title("Chess")
+    root.title("Chess 2")
     gui = GUI(root, chessboard)
     gui.draw_board()
+    gui.
     root.mainloop()
 
 if __name__ == "__main__":

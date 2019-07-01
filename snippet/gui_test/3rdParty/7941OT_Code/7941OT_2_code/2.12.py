@@ -356,4 +356,5 @@ textPad.bind("<Any-KeyPress>", update_line_number)
 
 textPad.tag_configure("active_line", background="ivory2")
 
+update_line_number()
 root.mainloop()

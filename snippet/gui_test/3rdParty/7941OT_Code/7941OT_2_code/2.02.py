@@ -9,12 +9,9 @@ Step 4: Adding labels to hold shortcut toolbar and line number
 from tkinter import *
 root = Tk()
 
-
-
 #
 # Step 2 & Step 3: Adding Menu Bar and adding menu drop down choices
 #
-
 
 #defining icons for compund menu demonstration
 newicon = PhotoImage(file='icons/new_file.gif')
@@ -52,8 +49,7 @@ editmenu.add_separator()
 editmenu.add_command(label="Select All", underline=7, accelerator='Ctrl+A')
 menubar.add_cascade(label="Edit", menu=editmenu)
 
-
-#View menu - 
+#View menu -
 viewmenu = Menu(menubar, tearoff=0)
 showln = IntVar()
 showln.set(1)

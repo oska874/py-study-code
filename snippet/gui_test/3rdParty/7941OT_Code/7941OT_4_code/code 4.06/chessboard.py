@@ -142,10 +142,14 @@ class Board(dict):
 
     def alpha_notation(self,xycoord):
         if not self.is_on_board(xycoord): return
-        return self.y_axis[xycoord[1]] + str(self.x_axis[xycoord[0]])
+        print(xycoord[0],xycoord[1])
+        ###return self.y_axis[xycoord[1]] + str(self.x_axis[xycoord[0]])
+        print("xy ",xycoord[1], int(xycoord[1]))
+        return self.y_axis[int(xycoord[1])] # + str(self.x_axis[xycoord[0]])
 
 
     def num_notation(self, coord):
+        print("nn ",coord[0],coord[1])
         return int(coord[1])-1, self.y_axis.index(coord[0])
 
     def is_on_board(self, coord):

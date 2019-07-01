@@ -56,6 +56,7 @@ class GUI():
         selected_column = event.x / col_size
         selected_row = 7 - (event.y / row_size)
         pos = self.chessboard.alpha_notation((selected_row, selected_column))
+        print("pos ",pos)
         try:
             piece = self.chessboard[pos]
         except:
@@ -141,4 +142,5 @@ def main(chessboard):
 
 if __name__ == "__main__":
     game = chessboard.Board()
+    print("show done")
     main(game)

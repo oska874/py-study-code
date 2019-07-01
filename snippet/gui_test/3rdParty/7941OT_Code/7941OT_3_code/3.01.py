@@ -14,7 +14,7 @@ class DrumMachine():
 
     def app(self):
         self.root = Tk()
-        self.root.title('Drum Beast')
+        self.root.title('Drum Beast !!!')
         self.root.mainloop()
 
 

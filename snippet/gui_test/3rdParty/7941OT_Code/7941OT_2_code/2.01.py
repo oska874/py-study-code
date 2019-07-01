@@ -39,6 +39,9 @@ menubar.add_cascade(label="View", menu=viewmenu)
 aboutmenu = Menu(menubar, tearoff=0)
 menubar.add_cascade(label="About", menu=aboutmenu)
 
+toolmenu = Menu(menubar, tearoff=1)
+menubar.add_cascade(label="Tool", menu=toolmenu)
+
 # Displaying menu on top of root.
 root.config(menu=menubar)
 

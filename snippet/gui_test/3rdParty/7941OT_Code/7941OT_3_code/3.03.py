@@ -84,8 +84,6 @@ class DrumMachine():
         self.bpu_widget.grid(row=0, column=7)
 
         self.create_right_pad()
-        
-        
 
 
     def app(self):
